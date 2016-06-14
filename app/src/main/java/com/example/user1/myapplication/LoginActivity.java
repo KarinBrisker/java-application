@@ -1,137 +1,172 @@
 package com.example.user1.myapplication;
 
-import android.app.Activity;
-import android.app.ProgressDialog;
+import android.content.Context;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.text.TextUtils;
 import android.util.Log;
-
-import android.content.Intent;
 import android.view.View;
+import android.view.View.OnClickListener;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.TextView;
 import android.widget.Toast;
 
-import butterknife.ButterKnife;
-import butterknife.InjectView;
+import org.json.JSONException;
+import org.json.JSONObject;
 
-public class LoginActivity extends Activity {
-    private static final String TAG = "LoginActivity";
-    private static final int REQUEST_SIGNUP = 0;
-//
-//    @InjectView(R.id.input_email) EditText _emailText;
-//    @InjectView(R.id.input_password) EditText _passwordText;
-//    @InjectView(R.id.btn_login) Button _loginButton;
-//    @InjectView(R.id.link_signup) TextView _signupLink;
+import java.io.BufferedInputStream;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.URL;
+
+public class LoginActivity extends AppCompatActivity {
+    private EditText mEmailView;
+    private View mProgressView;
+    private View mLoginFormView;
+    private UserLoginTask mAuthTask;
 
     @Override
-    public void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-  //      ButterKnife.inject(this);
 
-//        _loginButton.setOnClickListener(new View.OnClickListener() {
-//
-//            @Override
-//            public void onClick(View v) {
-//                login();
-//            }
-//        });
-//
-//        _signupLink.setOnClickListener(new View.OnClickListener() {
-//
-//            @Override
-//            public void onClick(View v) {
-//                // Start the Signup activity
-//                Intent intent = new Intent(getApplicationContext(), SignupActivity.class);
-//                startActivityForResult(intent, REQUEST_SIGNUP);
-//            }
-//        });
+        mEmailView = (EditText) findViewById(R.id.email);
+
+        Button mEmailSignInButton = (Button) findViewById(R.id.email_sign_in_button);
+        mEmailSignInButton.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                attemptLogin();
+            }
+        });
+
+        mLoginFormView = findViewById(R.id.login_form);
+        mProgressView = findViewById(R.id.login_progress);
     }
-//
-//    public void login() {
-//        Log.d(TAG, "Login");
-//
-//        if (!validate()) {
-//            onLoginFailed();
-//            return;
-//        }
-//
-//        _loginButton.setEnabled(false);
-//
-//        final ProgressDialog progressDialog = new ProgressDialog(LoginActivity.this,
-//                R.style.AppTheme_Dark_Dialog);
-//        progressDialog.setIndeterminate(true);
-//        progressDialog.setMessage("Authenticating...");
-//        progressDialog.show();
-//
-//        String email = _emailText.getText().toString();
-//        String password = _passwordText.getText().toString();
-//
-//        // TODO: Implement your own authentication logic here.
-//
-//        new android.os.Handler().postDelayed(
-//                new Runnable() {
-//                    public void run() {
-//                        // On complete call either onLoginSuccess or onLoginFailed
-//                        onLoginSuccess();
-//                        // onLoginFailed();
-//                        progressDialog.dismiss();
-//                    }
-//                }, 3000);
-//    }
-//
-//
-//    @Override
-//    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-//        if (requestCode == REQUEST_SIGNUP) {
-//            if (resultCode == RESULT_OK) {
-//
-//                // TODO: Implement successful signup logic here
-//                // By default we just finish the Activity and log them in automatically
-//                this.finish();
-//            }
-//        }
-//    }
-//
-//    @Override
-//    public void onBackPressed() {
-//        // disable going back to the MainActivity
-//        moveTaskToBack(true);
-//    }
-//
-//    public void onLoginSuccess() {
-//        _loginButton.setEnabled(true);
-//        finish();
-//    }
-//
-//    public void onLoginFailed() {
-//        Toast.makeText(getBaseContext(), "Login failed", Toast.LENGTH_LONG).show();
-//
-//        _loginButton.setEnabled(true);
-//    }
-//
-//    public boolean validate() {
-//        boolean valid = true;
-//
-//        String email = _emailText.getText().toString();
-//        String password = _passwordText.getText().toString();
-//
-//        if (email.isEmpty() || !android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
-//            _emailText.setError("enter a valid email address");
-//            valid = false;
-//        } else {
-//            _emailText.setError(null);
-//        }
-//
-//        if (password.isEmpty() || password.length() < 4 || password.length() > 10) {
-//            _passwordText.setError("between 4 and 10 alphanumeric characters");
-//            valid = false;
-//        } else {
-//            _passwordText.setError(null);
-//        }
-//
-//        return valid;
-//    }
+
+    private void attemptLogin() {
+        mEmailView.setError(null);
+        String email = mEmailView.getText().toString();
+
+        boolean cancel = false;
+        View focusView = null;
+
+        // Check for a valid email address.
+        if (TextUtils.isEmpty(email)) {
+            mEmailView.setError(getString(R.string.error_field_required));
+            focusView = mEmailView;
+            cancel = true;
+        } else if (!isEmailValid(email)) {
+            mEmailView.setError(getString(R.string.error_invalid_email));
+            focusView = mEmailView;
+            cancel = true;
+        }
+
+        if (cancel) {
+            focusView.requestFocus();
+        } else {
+            View view = this.getCurrentFocus();
+            if (view != null) {
+                InputMethodManager imm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
+                imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
+            }
+
+            showProgress(true);
+            mAuthTask = new UserLoginTask(email);
+            mAuthTask.execute();
+        }
+    }
+
+    private void showProgress(boolean b) {
+        if (b) {
+            mLoginFormView.setVisibility(View.GONE);
+            mProgressView.setVisibility(View.VISIBLE);
+        }else {
+            mLoginFormView.setVisibility(View.VISIBLE);
+            mProgressView.setVisibility(View.GONE);
+        }
+    }
+
+    private boolean isEmailValid(String email) {
+        //TODO: Replace this with your own logic
+        return email.contains("@");
+    }
+
+    class User{
+        private String name;
+
+        public User(JSONObject object){
+            try {
+                this.name = object.getString("Name");
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+        }
+
+        public String getName() {
+            return name;
+        }
+    }
+
+    public class UserLoginTask extends AsyncTask<Void, Void, User> {
+        private final String mEmail;
+        UserLoginTask(String email) {
+            mEmail = email;
+        }
+        @Override
+        protected User doInBackground(Void... params) {
+            Log.i("doInBackground", Thread.currentThread().getName());
+            try {
+                URL url = new URL("http://www.google.com/");
+                HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
+                try {
+                    InputStream in = new BufferedInputStream(urlConnection.getInputStream());
+
+                    BufferedReader streamReader = new BufferedReader(new InputStreamReader(in, "UTF-8"));
+                    StringBuilder responseStrBuilder = new StringBuilder();
+
+                    String inputStr;
+                    while ((inputStr = streamReader.readLine()) != null)
+                        responseStrBuilder.append(inputStr);
+
+                    JSONObject json = new JSONObject(responseStrBuilder.toString());
+
+                    return new User(json);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                } finally {
+                    urlConnection.disconnect();
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(final User user) {
+            Log.i("doInBackground", Thread.currentThread().getName());
+            showProgress(false);
+
+            if (user != null && user.getName() != null)
+                finish();
+            else
+            {
+                Toast.makeText(LoginActivity.this, "Failed", Toast.LENGTH_LONG).show();
+            }
+        }
+
+        @Override
+        protected void onCancelled() {
+            mAuthTask = null;
+            showProgress(false);
+        }
+    }
 }
+
