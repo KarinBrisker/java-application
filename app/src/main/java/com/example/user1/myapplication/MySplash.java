@@ -45,7 +45,7 @@ public class MySplash extends Activity {
                     }
                 }
 
-                Intent i = new Intent(MySplash.this, lllogin.class);
+                Intent i = new Intent(MySplash.this, SignupActivity.class);
                 startActivity(i);
             }
         });
