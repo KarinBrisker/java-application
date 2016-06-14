@@ -1,0 +1,5 @@
+<resources>
+    <declare-styleable name="TableCell">
+        <attr name="canDrop" format="boolean" />
+    </declare-styleable>
+</resources>

@@ -1,7 +1,5 @@
 package com.example.user1.myapplication;
 
-import android.hardware.Sensor;
-import android.hardware.SensorManager;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
@@ -12,6 +10,7 @@ import android.view.MenuItem;
 
 
 public class ExplainActivity extends AppCompatActivity {
+    //work
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
