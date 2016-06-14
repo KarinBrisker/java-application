@@ -9,7 +9,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
-        android:text="Tab 2"
         android:textAppearance="?android:attr/textAppearanceLarge"/>
 
     <Button
@@ -18,5 +17,20 @@
         android:layout_width="fill_parent" android:layout_marginTop="15dp"
         android:layout_height="wrap_content" android:background="@drawable/button"
         android:text="@string/skipbtn"/>
+
+    <ImageView
+        android:id="@+id/logo"
+        android:layout_width="fill_parent"  android:layout_height="wrap_content"
+        android:src="@drawable/monkey3"        android:paddingTop="50dp"
+        android:layout_alignParentTop="true" />
+
+    <TextView
+        android:id="@+id/text2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/logo"
+        android:layout_centerInParent="true"
+        android:text="@string/explain3"
+        android:textAppearance="?android:attr/textAppearanceLarge"/>
 
 </RelativeLayout>
