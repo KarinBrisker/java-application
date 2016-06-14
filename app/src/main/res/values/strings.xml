@@ -3,7 +3,14 @@
     <string name="single_player">Join</string>
     <string name="multiple_player">Drag</string>
     <string name="title_activity_login">Sign in</string>
+    <string name="hello">Hello World, ParseStarterProjectActivity!</string>
 
+    <string name="Username">Username</string>
+    <string name="Password">Password</string>
+    <string name="LoginBtn">Login</string>
+    <string name="SignupBtn">Sign Up</string>
+    <string name="LogoutBtn">Log Out</string>
+    <string name="Welcome">Welcome!</string>
     <!-- Strings related to login -->
     <string name="prompt_email">Email</string>
     <string name="prompt_password">Password (optional)</string>
@@ -29,4 +36,6 @@
     <string name="title_activity_my_explanations">MyExplanations</string>
     <string name="title_activity_login1">LoginActivity1</string>
     <string name="title_activity_signup">SignupActivity</string>
+    <string name="title_activity_login_signup">LoginSignupActivity</string>
+    <string name="title_activity_lllogin">lllogin</string>
 </resources>
