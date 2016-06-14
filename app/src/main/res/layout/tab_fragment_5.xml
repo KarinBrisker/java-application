@@ -5,23 +5,23 @@
     android:orientation="vertical">
 
     <TextView
-    android:id="@+id/textView"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:layout_centerInParent="true"
-    android:textAppearance="?android:attr/textAppearanceLarge"/>
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:textAppearance="?android:attr/textAppearanceLarge"/>
 
     <Button
-        android:id="@+id/btnSkip"
+        android:id="@+id/btnContinue"
         android:textSize="20dp"         android:textColor="#FF258dc8"
         android:layout_width="fill_parent" android:layout_marginTop="15dp"
         android:layout_height="wrap_content" android:background="@drawable/button"
-        android:text="@string/skipbtn"/>
+        android:text="@string/continueBtn"/>
 
     <ImageView
         android:id="@+id/logo"
         android:layout_width="fill_parent"  android:layout_height="wrap_content"
-        android:src="@drawable/monkey1"        android:paddingTop="50dp"
+        android:src="@drawable/monkey5"        android:paddingTop="50dp"
         android:layout_alignParentTop="true" />
 
     <TextView
@@ -30,7 +30,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/logo"
         android:layout_centerInParent="true"
-        android:text="@string/explain1"
+        android:text="@string/explain5"
         android:textAppearance="?android:attr/textAppearanceLarge"/>
 
 </RelativeLayout>

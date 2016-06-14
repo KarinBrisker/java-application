@@ -16,16 +16,15 @@ public class ExplainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_explain);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        //setSupportActionBar(toolbar);
-        //ggr
+
 
         TabLayout tabLayout = (TabLayout) findViewById(R.id.tab_layout);
-        tabLayout.addTab(tabLayout.newTab().setText("Tab 1").setIcon(R.drawable.redpoint));
+        tabLayout.addTab(tabLayout.newTab().setIcon(R.drawable.redpoint));
         tabLayout.addTab(tabLayout.newTab().setIcon(R.drawable.whitepoint));
-        tabLayout.addTab(tabLayout.newTab().setText("Tab 3").setIcon(R.drawable.whitepoint));
+        tabLayout.addTab(tabLayout.newTab().setIcon(R.drawable.whitepoint));
+        tabLayout.addTab(tabLayout.newTab().setIcon(R.drawable.whitepoint));
+        tabLayout.addTab(tabLayout.newTab().setIcon(R.drawable.whitepoint));
         tabLayout.setTabGravity(TabLayout.GRAVITY_FILL);
-        //checkexplainn ggr
 
 
         final ViewPager viewPager = (ViewPager) findViewById(R.id.pager);
@@ -50,7 +49,7 @@ public class ExplainActivity extends AppCompatActivity {
 
             }
         });
-    }
+        }
 
 
 
