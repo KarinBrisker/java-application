@@ -8,14 +8,14 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 
-public class TabFragment3 extends Fragment {
+public class TabFragment4 extends Fragment {
 
     ViewPager viewPager;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
-        View view =  inflater.inflate(R.layout.tab_fragment_3, container, false);
+        View view =  inflater.inflate(R.layout.tab_fragment_4, container, false);
 
         final Button btn =
                 (Button) view.findViewById(R.id.btnSkip);
@@ -27,7 +27,7 @@ public class TabFragment3 extends Fragment {
             @Override
             public void onClick(View v)
             {
-                viewPager.setCurrentItem(3);
+                viewPager.setCurrentItem(4);
             }
         });
 

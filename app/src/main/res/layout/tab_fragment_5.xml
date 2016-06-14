@@ -9,14 +9,14 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
-        android:text="Tab 2"
+        android:text="Tab 3"
         android:textAppearance="?android:attr/textAppearanceLarge"/>
 
     <Button
-        android:id="@+id/btnSkip"
+        android:id="@+id/btnContinue"
         android:textSize="20dp"         android:textColor="#FF258dc8"
         android:layout_width="fill_parent" android:layout_marginTop="15dp"
         android:layout_height="wrap_content" android:background="@drawable/button"
-        android:text="@string/skipbtn"/>
+        android:text="@string/continueBtn"/>
 
 </RelativeLayout>

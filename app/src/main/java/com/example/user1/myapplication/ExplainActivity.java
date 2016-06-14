@@ -24,8 +24,9 @@ public class ExplainActivity extends AppCompatActivity {
         tabLayout.addTab(tabLayout.newTab().setText("Tab 1").setIcon(R.drawable.redpoint));
         tabLayout.addTab(tabLayout.newTab().setIcon(R.drawable.whitepoint));
         tabLayout.addTab(tabLayout.newTab().setText("Tab 3").setIcon(R.drawable.whitepoint));
+        tabLayout.addTab(tabLayout.newTab().setText("Tab 4").setIcon(R.drawable.whitepoint));
+        tabLayout.addTab(tabLayout.newTab().setText("Tab 5").setIcon(R.drawable.whitepoint));
         tabLayout.setTabGravity(TabLayout.GRAVITY_FILL);
-        //checkexplainn ggr
 
 
         final ViewPager viewPager = (ViewPager) findViewById(R.id.pager);
