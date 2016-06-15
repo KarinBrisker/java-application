@@ -19,11 +19,6 @@
         </activity>
 
         <activity android:name=".ExplainActivity" >
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-
         </activity>
 
         <activity
@@ -31,30 +26,23 @@
             android:label="@string/title_activity_login" >
         </activity>
 
-        <!--
         <activity
-            android:name=".PokeActivity"
-            android:label="@string/title_activity_poke"
-            android:theme="@style/AppTheme.NoActionBar" >
+            android:name=".Checking">
             <intent-filter>
-                <action android:name="ap2.biu.poker.new_move"></action>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
 
-
-        <activity
-            android:name=".DragActivity"
-            android:label="@string/title_activity_drag"
-            android:theme="@style/AppTheme.NoActionBar" >
+        <activity android:name=".MsgActivity" >
         </activity>
+
 
         <service
             android:name=".LocalService"
             android:enabled="true"
             android:exported="true" >
         </service>
-        -->
-
 
     </application>
 

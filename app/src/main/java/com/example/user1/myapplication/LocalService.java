@@ -10,7 +10,15 @@ import android.os.Message;
 import android.os.Messenger;
 import android.os.RemoteException;
 import android.support.annotation.Nullable;
+import android.util.Log;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.PrintWriter;
+import java.net.Socket;
+import java.util.LinkedList;
+import java.util.Queue;
 import java.util.Random;
 
 public class LocalService extends Service {
@@ -22,18 +30,41 @@ public class LocalService extends Service {
         Thread thread = new Thread(new Runnable() {
             @Override
             public void run() {
-                for (int i = 0; i < 3; i++) {
-                    Intent intent = new Intent();
-                    intent.setAction(BROADCAST_ACTION);
-                    sendBroadcast(intent);
 
+                String hostName = "127.0.0.1";
+                int portNumber = 5555;
+                Queue<String> messagesRecieved = new LinkedList<String>();
+                int flag = 0;
+                String msg = null;
+                Socket echoSocket;
+                PrintWriter writeToSocket;
+                BufferedReader readFromSocket = null;
+                try {
+                    echoSocket = new Socket(hostName, portNumber);
+                    writeToSocket = new PrintWriter(echoSocket.getOutputStream(), true);
+                    readFromSocket = new BufferedReader(new InputStreamReader(echoSocket.getInputStream()));
+                } catch (IOException ex) {
+                    System.out.print("beacuse\n");
+                    System.out.print(ex.getCause());
+                }
+
+                //start reading
+                while (true) {
+                    char[] stringData = new char[4096];
                     try {
-                        Thread.sleep(3000);
-                    } catch (InterruptedException e) {
+                        readFromSocket.read(stringData);
+                    } catch (IOException e) {
                         e.printStackTrace();
                     }
+                    String dataStr = new String(stringData);
+                    if (dataStr != null) {
+                        if (dataStr.equals("\"empty\"") == false) {
+                            //messagesRecieved.add(dataStr);
+                            flag = 1;
+                            msg = dataStr;
+                        }
+                    }
                 }
-                stopSelf();
             }
         });
 
