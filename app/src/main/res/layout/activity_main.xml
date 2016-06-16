@@ -1,37 +1,64 @@
-<?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent" android:layout_height="match_parent"
-    android:padding="@dimen/activity_horizontal_margin" android:background="@drawable/splah_bg">
 
-    <ImageView
-        android:id="@+id/logo"
-        android:layout_width="fill_parent"  android:layout_height="wrap_content"
-        android:src="@drawable/poke"        android:paddingTop="50dp"
-        android:layout_alignParentTop="true" />
+        <!--<RelativeLayout-->
+            <!--android:id="@+id/menuFragment"-->
+            <!--android:layout_width="fill_parent"-->
+            <!--android:layout_height="300px"-->
+            <!--android:layout_weight="1"></RelativeLayout>-->
 
-    <LinearLayout
-        android:layout_width="fill_parent"  android:layout_height="wrap_content"
-        android:layout_centerInParent="true" android:orientation="vertical">
 
-        <Button
-            android:id="@+id/btnJoin" android:textSize="20dp" android:textColor="#FF258dc8"
-            android:layout_width="fill_parent" android:layout_height="wrap_content"
-            android:layout_marginTop="15dp" android:background="@drawable/button"
-            android:text="@string/single_player"/>
 
-        <Button
-            android:id="@+id/btnPoke"
-            android:textSize="20dp"         android:textColor="#FF258dc8"
-            android:layout_width="fill_parent" android:layout_marginTop="15dp"
-            android:layout_height="wrap_content" android:background="@drawable/button"
-            android:text="@string/multiple_player"/>
+        <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="#FFFFFF"
+            tools:context="com.example.user1.myapplication.MainActivity"
 
-        <Button
-            android:id="@+id/btnFragments"
-            android:textSize="20dp"         android:textColor="#FF258dc8"
-            android:layout_width="fill_parent" android:layout_marginTop="15dp"
-            android:layout_height="wrap_content" android:background="@drawable/button"
-            android:text="@string/fragments"/>
+        android:orientation="vertical"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true">
 
-    </LinearLayout>
-</RelativeLayout>
+            <FrameLayout
+                android:id="@+id/mainFragment"
+                android:layout_width="fill_parent"
+                android:layout_height="430dp">
+                <!--android:layout_below="@+id/menuFragment"-->
+
+
+            </FrameLayout>
+
+
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_below="@id/mainFragment"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:weightSum="1">
+
+                <EditText
+                    android:id="@+id/text_post"
+                    android:layout_width="235dp"
+                    android:layout_height="125dp"
+                    android:background="@android:drawable/editbox_background"
+                    android:inputType="text"
+                    android:layout_weight="0.96"
+                    android:layout_gravity="bottom" />
+
+
+                <Button
+                    android:text="Post"
+                    android:id="@+id/postButton"
+                    android:layout_width="100dip"
+                    android:layout_height="125dp"
+                    android:layout_gravity="bottom" />
+
+
+
+            </LinearLayout>
+
+
+        </LinearLayout>
+
