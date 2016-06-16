@@ -49,10 +49,10 @@ public class MainActivity extends BaseActivity implements SensorEventListener {
         FragmentManager fm = getSupportFragmentManager();
         FragmentTransaction ft = fm.beginTransaction();
 
-        if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE)
-        {
-            ft.add(R.id.menuFragment, new MenuFragment());
-        }
+//        if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE)
+//        {
+//            ft.add(R.id.menuFragment, new MenuFragment());
+//        }
 
         ft.add(R.id.mainFragment, newFragment);
 
