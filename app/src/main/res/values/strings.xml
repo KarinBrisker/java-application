@@ -20,7 +20,12 @@
     <string name="action_settings">Settings</string>
     <string name="section_format">Hello World from section: %1$d</string>
 
-<!-- TODO: Remove or change this placeholder text -->
+
+
+    <string name="post1">text</string>
+
+
+    <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="title_activity_drag">DragActivity</string>
     <string name="fragments">Fragments</string>
@@ -36,4 +41,6 @@
     <string name="explain4">each time the server get a new message it send it to all of the users that you can see the messages everybody send</string>
     <string name="explain5">Hope you will use this app correct and enjoy it! let Start!</string>
     <string name="logoUpTab">Our App</string>
+    <string name="title_activity_msgs">msgsActivity</string>
+    <string name="title_activity_messages">MessagesActivity</string>
 </resources>
