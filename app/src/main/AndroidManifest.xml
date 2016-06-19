@@ -10,47 +10,27 @@
         android:label="@string/logoUpTab"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".SplashActivity" />
-        <activity android:name=".MainActivity" />
-        <activity android:name=".MySplash">
+        <activity android:name=".SplashActivity"></activity>
+        <activity android:name=".MainActivity"></activity>
+        <activity android:name=".ExplainActivity"></activity>
+        <activity
+            android:name=".LoginActivity"
+            android:label="@string/title_activity_login"></activity>
+
+        <activity android:name=".ServerCheck">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity
-            android:name=".LoginActivity"
-            android:label="@string/title_activity_login" />
-        <activity android:name=".SignupActivity" />
-        <!--
-        <activity
-            android:name=".PokeActivity"
-            android:label="@string/title_activity_poke"
-            android:theme="@style/AppTheme.NoActionBar" >
-            <intent-filter>
-                <action android:name="ap2.biu.poker.new_move"></action>
-            </intent-filter>
-        </activity>
-        <activity
-            android:name=".DragActivity"
-            android:label="@string/title_activity_drag"
-            android:theme="@style/AppTheme.NoActionBar" >
-        </activity>
+
         <service
             android:name=".LocalService"
             android:enabled="true"
-            android:exported="true" >
-        </service>
-        -->
+            android:exported="true"></service>
 
 
-        <receiver android:name=".NotificationReceiver"></receiver>
-
-        <activity
-            android:name=".MessagesActivity"
-            android:label="@string/title_activity_messages"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
 </manifest>

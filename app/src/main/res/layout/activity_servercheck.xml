@@ -1,0 +1,40 @@
+<RelativeLayout
+    android:id="@+id/explain_layout"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ServerCheck">
+
+
+    <EditText android:id="@+id/editText" android:layout_width="wrap_content"
+        android:layout_height="wrap_content" android:hint="@string/prompt_email"
+        android:inputType="textEmailAddress" android:maxLines="1"
+        android:singleLine="true" />
+
+    <Button
+        android:id="@+id/btnSend"
+        android:textSize="20dp"         android:textColor="#FF258dc8"
+        android:layout_width="wrap_content" android:layout_marginTop="15dp"
+        android:layout_height="wrap_content" android:background="@drawable/button"
+        android:layout_below="@id/editText"
+        android:text="@string/skipbtn"/>
+
+
+    <TextView
+        android:id="@+id/textResponse"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:text="@string/explain1"
+        android:textAppearance="?android:attr/textAppearanceLarge"/>
+
+
+
+
+
+
+
+
+</RelativeLayout>
