@@ -93,8 +93,8 @@ public class MainFragment extends Fragment {
         Post item = new Post();
         item.setId(id);
         item.setName(name);
-        item.setImg(img);
-        item.setProfile(profile);
+//        item.setImg(img);
+//        item.setProfile(profile);
         item.setStatus(status);
         item.setTimeStamp(time);
 

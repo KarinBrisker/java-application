@@ -6,6 +6,7 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.ActionBarActivity;
 import android.text.TextUtils;
+
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,7 +15,10 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 
+import java.text.DateFormat;
+import java.util.Date;
 import java.util.List;
+
 
 public class PostsAdapter extends BaseAdapter {
     private ActionBarActivity activity;
@@ -59,30 +63,29 @@ public class PostsAdapter extends BaseAdapter {
         TextView url = (TextView) convertView.findViewById(R.id.txtUrl);
 
         Post item = posts.get(position);
-        ImageView imgPost = (ImageView) convertView.findViewById(R.id.post_imgPost);
-        imgPost.setImageResource(item.getImg());
+     //   ImageView imgPost = (ImageView) convertView.findViewById(R.id.post_imgPost);
+     //   imgPost.setImageResource(item.getImg());
 
-        imgPost.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                FragmentManager fm = activity.getSupportFragmentManager();
-                Fragment newFragment = new ImagesFragment();
-                FragmentTransaction ft = fm.beginTransaction();
+//        imgPost.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                FragmentManager fm = activity.getSupportFragmentManager();
+//
+//                FragmentTransaction ft = fm.beginTransaction();
+//
+//                ft.add(R.id.mainFragment, newFragment);
+//                ft.addToBackStack("images");
+//
+//                ft.commit();
+//            }
+//        });
 
-                ft.add(R.id.mainFragment, newFragment);
-                ft.addToBackStack("images");
-
-                ft.commit();
-            }
-        });
-
-        ImageView imgProfile = (ImageView) convertView.findViewById(R.id.post_imgProfile);
-        imgProfile.setImageResource(item.getProfile());
+//        ImageView imgProfile = (ImageView) convertView.findViewById(R.id.post_imgProfile);
+//        imgProfile.setImageResource(item.getProfile());
 
         name.setText(item.getName());
-
-
-        timestamp.setText(item.getTimeStamp());
+        String currentDateTimeString = DateFormat.getDateTimeInstance().format(new Date());
+        timestamp.setText(currentDateTimeString);
 
         // Chcek for empty status message
         if (!TextUtils.isEmpty(item.getStatus())) {

@@ -44,6 +44,7 @@ public class SignupActivity extends ActionBarActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_signup);
         un = (EditText) findViewById(R.id.fullName);
+        un.requestFocus();
         em = (EditText) findViewById(R.id.input_email);
         nn = (EditText) findViewById(R.id.input_name);
         pw = (EditText) findViewById(R.id.input_password);

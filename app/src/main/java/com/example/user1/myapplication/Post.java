@@ -5,8 +5,8 @@ public class Post {
     private String timeStamp;
     private String status;
     private int id;
-    private int img;
-    private int profile;
+ //   private int img;
+  //  private int profile;
 
     public String getName() {
         return name;
@@ -28,13 +28,13 @@ public class Post {
         this.name = name;
     }
 
-    public void setImg(int img) {
-        this.img = img;
-    }
-
-    public int getImg() {
-        return img;
-    }
+//    public void setImg(int img) {
+//        this.img = img;
+//    }
+//
+//    public int getImg() {
+//        return img;
+//    }
 
     public void setStatus(String status) {
         this.status = status;
@@ -44,11 +44,11 @@ public class Post {
         this.timeStamp = timeStamp;
     }
 
-    public void setProfile(int profile) {
-        this.profile = profile;
-    }
-
-    public int getProfile() {
-        return profile;
-    }
+//    public void setProfile(int profile) {
+//        this.profile = profile;
+//    }
+//
+//    public int getProfile() {
+//        return profile;
+//    }
 }
