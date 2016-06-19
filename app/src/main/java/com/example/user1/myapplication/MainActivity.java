@@ -5,6 +5,7 @@ import android.app.AlarmManager;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
@@ -84,8 +85,10 @@ public class MainActivity extends BaseActivity implements SensorEventListener {
                 String new_post=post_txt.getText().toString();
                 MainFragment fragment = (MainFragment)fm.findFragmentById(R.id.mainFragment);
                 String currentDateTimeString = DateFormat.getDateTimeInstance().format(new Date());
-
-                fragment.generateFakePosts(1,"222",currentDateTimeString,new_post);
+                SharedPreferences settings = getApplicationContext().getSharedPreferences("mySettings", 0);
+                String name = settings.getString("NAME", null);
+                fragment.generateFakePosts(1,name,currentDateTimeString,new_post);
+                post_txt.setText("");
             }
         });
     }

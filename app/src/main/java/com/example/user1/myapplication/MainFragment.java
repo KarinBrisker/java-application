@@ -48,24 +48,24 @@ public class MainFragment extends Fragment {
         generateFakePosts(1, "9GAG","9 hrs", "It's Dangerous To Go Alone, So These Animals Decide To Go In Pairs");
 
         poststAdapter.notifyDataSetChanged();
-/*
-        swipeLayout = (SwipeRefreshLayout) view.findViewById(R.id.feed_swipeLayout);
-        swipeLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
-            @Override
-            public void onRefresh() {
-                Intent intent = new Intent(getActivity(), ReloadService.class);
-                getActivity().startService(intent);
-            }
-        });
-        swipeLayout.setColorScheme(android.R.color.holo_blue_bright,
-                android.R.color.holo_green_light,
-                android.R.color.holo_orange_light,
-                android.R.color.holo_red_light);
 
-        IntentFilter intentFilter = new IntentFilter();
-        intentFilter.addAction(ReloadService.DONE);
-        getActivity().registerReceiver(reloadDone, intentFilter);
-*/
+//        swipeLayout = (SwipeRefreshLayout) view.findViewById(R.id.feed_swipeLayout);
+//        swipeLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+//            @Override
+//            public void onRefresh() {
+//                Intent intent = new Intent(getActivity(), ReloadService.class);
+//                getActivity().startService(intent);
+//            }
+//        });
+////        swipeLayout.setColorScheme(getResources().getColor(android.R.color.holo_blue_bright),
+////                getResources().getColor(android.R.color.holo_green_light),
+////                        getResources().getColor(android.R.color.holo_orange_light),
+////                                getResources().getColor(android.R.color.holo_red_light));
+//
+//        IntentFilter intentFilter = new IntentFilter();
+//        intentFilter.addAction(ReloadService.DONE);
+//        getActivity().registerReceiver(reloadDone, intentFilter);
+
         return view;
     }
 
@@ -98,6 +98,7 @@ public class MainFragment extends Fragment {
         item.setTimeStamp(time);
 
         posts.add(item);
+        poststAdapter.notifyDataSetChanged();
     }
 
 

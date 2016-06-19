@@ -10,6 +10,8 @@ package com.example.user1.myapplication;
     import android.annotation.SuppressLint;
     import android.app.ActionBar;
     import android.app.Activity;
+    import android.content.Intent;
+    import android.content.SharedPreferences;
     import android.os.Bundle;
     import android.support.v7.app.ActionBarActivity;
     import android.view.View;
@@ -47,18 +49,29 @@ package com.example.user1.myapplication;
                 public void onClick(View v) {
                     name=un.getText().toString();
                     password=pw.getText().toString();
+
+                    SharedPreferences settings = getApplicationContext().getSharedPreferences("mySettings", 0);
+                    SharedPreferences.Editor editor = settings.edit();
+                    editor.putString("NAME",name);
+
+// Apply the edits!
+                    editor.apply();
+                    Intent i = new Intent(lllogin.this, MainActivity.class);
+                    startActivity(i);
+
                 }
             });
-            ActionBar ab=getActionBar();
-            TextView textview=new TextView(getApplicationContext());
-            LayoutParams layoutparams = new RelativeLayout.LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT);
-            textview.setLayoutParams(layoutparams);
-            textview.setGravity(Gravity.CENTER);
-            textview.setText(ab.getTitle().toString());
-            textview.setTextSize(20);
-            ab.setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);
-            ab.setCustomView(textview);
+//            ActionBar ab=getActionBar();
+//            TextView textview=new TextView(getApplicationContext());
+//            LayoutParams layoutparams = new RelativeLayout.LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT);
+//            textview.setLayoutParams(layoutparams);
+//            textview.setGravity(Gravity.CENTER);
+//            textview.setText(ab.getTitle().toString());
+//            textview.setTextSize(20);
+//            ab.setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);
+//            ab.setCustomView(textview);
           //  setTitle("@string/app_name");
+
         }
 
 
