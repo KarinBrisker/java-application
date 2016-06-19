@@ -95,7 +95,7 @@ public class MainActivity extends BaseActivity implements SensorEventListener {
         mSensorListener = new ShakeEventListener();
         mSensorListener.setOnShakeListener(new ShakeEventListener.OnShakeListener() {
             public void onShake(){
-             //   Toast.makeText(this, "Shake!", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getBaseContext(), "Shake!", Toast.LENGTH_SHORT).show();
             }
 
         });
