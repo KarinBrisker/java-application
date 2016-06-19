@@ -63,25 +63,7 @@ public class PostsAdapter extends BaseAdapter {
         TextView url = (TextView) convertView.findViewById(R.id.txtUrl);
 
         Post item = posts.get(position);
-     //   ImageView imgPost = (ImageView) convertView.findViewById(R.id.post_imgPost);
-     //   imgPost.setImageResource(item.getImg());
 
-//        imgPost.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                FragmentManager fm = activity.getSupportFragmentManager();
-//
-//                FragmentTransaction ft = fm.beginTransaction();
-//
-//                ft.add(R.id.mainFragment, newFragment);
-//                ft.addToBackStack("images");
-//
-//                ft.commit();
-//            }
-//        });
-
-//        ImageView imgProfile = (ImageView) convertView.findViewById(R.id.post_imgProfile);
-//        imgProfile.setImageResource(item.getProfile());
 
         name.setText(item.getName());
         String currentDateTimeString = DateFormat.getDateTimeInstance().format(new Date());

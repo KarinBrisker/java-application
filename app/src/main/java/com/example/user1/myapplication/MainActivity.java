@@ -32,7 +32,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.RelativeLayout;
 import android.widget.RelativeLayout.LayoutParams;
-
+import android.widget.Toast;
 import java.text.DateFormat;
 import java.util.Date;
 import java.util.GregorianCalendar;
@@ -44,6 +44,7 @@ public class MainActivity extends BaseActivity implements SensorEventListener {
     private static final int SHAKE_THRESHOLD = 6000;
     Button postButton;
     SensorManager sensorManager;
+     ShakeEventListener mSensorListener;
     float last_x,last_y,last_z;
     private long lastUpdate;
     EditText post_txt;
@@ -91,11 +92,21 @@ public class MainActivity extends BaseActivity implements SensorEventListener {
                 post_txt.setText("");
             }
         });
+        mSensorListener = new ShakeEventListener();
+        mSensorListener.setOnShakeListener(new ShakeEventListener.OnShakeListener() {
+            public void onShake(){
+             //   Toast.makeText(this, "Shake!", Toast.LENGTH_SHORT).show();
+            }
+
+        });
     }
 
     @Override
     protected void onResume() {
         super.onResume();
+        sensorManager.registerListener(mSensorListener,
+                sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER),
+                SensorManager.SENSOR_DELAY_UI);
         // register this class as a listener for the orientation and
         // accelerometer sensors
         sensorManager.registerListener(this,
@@ -107,6 +118,7 @@ public class MainActivity extends BaseActivity implements SensorEventListener {
     protected void onPause() {
         // unregister listener
         super.onPause();
+        sensorManager.unregisterListener(mSensorListener);
         sensorManager.unregisterListener(this);
     }
 
@@ -125,15 +137,15 @@ public class MainActivity extends BaseActivity implements SensorEventListener {
             float speed = Math.abs(x+y+z-last_x-last_y-last_z) / diffTime * 10000;
 
             if (speed > SHAKE_THRESHOLD) {
-                AlarmManager alarmMgr = (AlarmManager)getSystemService(Context.ALARM_SERVICE);
-
-                Long timeToAlert = new GregorianCalendar().getTimeInMillis() + 5000;
-
-                Intent intent = new Intent(this, NotificationReceiver.class);
-                intent.putExtra("sender", "one");
-
-
-                alarmMgr.set(AlarmManager.RTC_WAKEUP, timeToAlert, PendingIntent.getBroadcast(this, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT));
+//                AlarmManager alarmMgr = (AlarmManager)getSystemService(Context.ALARM_SERVICE);
+//
+//                Long timeToAlert = new GregorianCalendar().getTimeInMillis() + 5000;
+//
+//                Intent intent = new Intent(this, NotificationReceiver.class);
+//                intent.putExtra("sender", "one");
+//
+//
+//                alarmMgr.set(AlarmManager.RTC_WAKEUP, timeToAlert, PendingIntent.getBroadcast(this, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT));
 /*
                 Intent intent2 = new Intent(this, NotificationReceiver.class);
                 intent2.putExtra("sender", "two");

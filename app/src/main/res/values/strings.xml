@@ -43,4 +43,5 @@
     <string name="title_activity_msgs">msgsActivity</string>
     <string name="title_activity_messages">MessagesActivity</string>
     <string name="title_activity_checking">checking</string>
+    <string name="title_activity_sel">sel</string>
 </resources>
