@@ -10,6 +10,8 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -20,10 +22,13 @@ public class SignupActivity extends Activity {
 
 
     EditText un, em, nn,pw;
+    private String user_name,password,nick_name,icon,email;
     TextView error,clean;
     Button ok;
     private String resp;
     private String errorMsg;
+    RadioGroup rg;
+    String radiovalue;
 
     /** Called when the activity is first created. */
     @Override
@@ -35,6 +40,7 @@ public class SignupActivity extends Activity {
         nn = (EditText) findViewById(R.id.input_name);
         pw = (EditText) findViewById(R.id.input_password);
         clean =(TextView) findViewById(R.id.link_clean);
+        rg =(RadioGroup)findViewById(R.id.rg_id);
         ok = (Button) findViewById(R.id.btn_signup);
         error = (TextView) findViewById(R.id.tv_error);
 
@@ -65,18 +71,20 @@ public class SignupActivity extends Activity {
         String email = em.getText().toString();
         String password = pw.getText().toString();
         String nickname=nn.getText().toString();
-        if (name.isEmpty() || name.length() < 3) {
-            un.setError("at least 3 characters");
+        if (name.isEmpty() || name.length() < 1) {
+            un.setError("at least one character");
             valid = false;
         } else {
             un.setError(null);
+            user_name=un.getText().toString();
         }
 
-        if (nickname.isEmpty() || nickname.length() < 3) {
-            nn.setError("at least 3 characters");
+        if (nickname.isEmpty() || nickname.length() < 1) {
+            nn.setError("at least one character");
             valid = false;
         } else {
             nn.setError(null);
+            nickname=nn.getText().toString();
         }
 
         if (email.isEmpty() || !android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
@@ -84,14 +92,25 @@ public class SignupActivity extends Activity {
             valid = false;
         } else {
             em.setError(null);
+            email=em.getText().toString();
         }
 
-        if (password.isEmpty() || password.length() < 4 || password.length() > 10) {
-            pw.setError("between 4 and 10 alphanumeric characters");
+        if (password.isEmpty() || password.length() < 1 || password.length() > 10) {
+            pw.setError("between 1 and 10 alphanumeric characters");
             valid = false;
         } else {
             pw.setError(null);
+            password=pw.getText().toString();
         }
+
+        if(rg.getCheckedRadioButtonId()==-1){
+            valid = false;
+        }
+        else {
+           icon =((RadioButton) findViewById(rg.getCheckedRadioButtonId())).getText().toString();
+        }
+
+
 
         return valid;
     }

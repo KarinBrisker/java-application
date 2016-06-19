@@ -20,6 +20,7 @@ package com.example.user1.myapplication;
         EditText un, pw;
         TextView error;
         Button ok;
+        private String name,password;
         private String resp;
         private String errorMsg;
 
@@ -32,6 +33,14 @@ package com.example.user1.myapplication;
             pw = (EditText) findViewById(R.id.et_pw);
             ok = (Button) findViewById(R.id.btn_login);
             error = (TextView) findViewById(R.id.tv_error);
+            ok.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    name=un.getText().toString();
+                    password=pw.getText().toString();
+                }
+            });
+        }
 
 //            ok.setOnClickListener(new View.OnClickListener() {
 
@@ -76,5 +85,5 @@ package com.example.user1.myapplication;
 //                    }
 //                }
 //            });
-        }
+
     }

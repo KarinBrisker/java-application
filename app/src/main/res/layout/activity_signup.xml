@@ -75,6 +75,7 @@
         <RadioGroup xmlns:android="http://schemas.android.com/apk/res/android"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
+            android:id="@+id/rg_id"
             android:orientation="vertical">
             <RadioButton android:id="@+id/radio_pirates"
                 android:layout_width="wrap_content"
