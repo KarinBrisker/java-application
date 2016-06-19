@@ -77,13 +77,13 @@
             android:layout_height="wrap_content"
             android:id="@+id/rg_id"
             android:orientation="vertical">
-            <RadioButton android:id="@+id/radio_pirates"
+            <RadioButton android:id="@+id/boy"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:drawableLeft="@drawable/boy"
                 android:onClick="onRadioButtonClicked"
                 android:checked="false" />
-            <RadioButton android:id="@+id/radio_ninjas"
+            <RadioButton android:id="@+id/girl"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:drawableLeft="@drawable/girl"

@@ -23,7 +23,7 @@ public class BaseActivity extends ActionBarActivity {
         ActionBar mActionBar = getSupportActionBar();
 
         mActionBar.setDisplayShowHomeEnabled(false);
-        mActionBar.setDisplayShowTitleEnabled(false);
+        mActionBar.setDisplayShowTitleEnabled(true);
         mActionBar.setBackgroundDrawable(new ColorDrawable(Color.parseColor("#3b5998")));
         LayoutInflater mInflater = LayoutInflater.from(this);
 

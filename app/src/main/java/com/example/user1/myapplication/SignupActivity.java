@@ -20,6 +20,12 @@ import android.widget.Toast;
 import butterknife.ButterKnife;
 import butterknife.InjectView;
 
+
+import android.view.Gravity;
+import android.widget.RelativeLayout;
+import android.widget.RelativeLayout.LayoutParams;
+
+
 public class SignupActivity extends ActionBarActivity {
 
 
@@ -64,7 +70,33 @@ public class SignupActivity extends ActionBarActivity {
                 nn.setText("");
             }
         });
+
+
+
+        final RadioButton boyButton = (RadioButton)findViewById(R.id.boy);
+        boyButton.setOnClickListener(new View.OnClickListener(){
+            public void onClick(View v) {
+
+            }
+        });
+        final Button girlButton = (RadioButton)findViewById(R.id.girl);
+        girlButton.setOnClickListener(new View.OnClickListener(){
+            public void onClick(View v) {
+            }
+        });
   //      SetActionBar();
+//
+//        ActionBar ab=getActionBar();
+//        TextView textview=new TextView(getApplicationContext());
+//        LayoutParams layoutparams = new RelativeLayout.LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT);
+//        textview.setLayoutParams(layoutparams);
+//        textview.setGravity(Gravity.CENTER);
+//        textview.setText(ab.getTitle().toString());
+//        textview.setTextSize(20);
+//        ab.setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);
+//        ab.setCustomView(textview);
+
+
     }
 //    private void SetActionBar(){
 //        ActionBar ab=getActionBar();

@@ -17,6 +17,13 @@ package com.example.user1.myapplication;
     import android.widget.EditText;
     import android.widget.TextView;
 
+
+
+    import android.view.Gravity;
+    import android.widget.RelativeLayout;
+    import android.widget.RelativeLayout.LayoutParams;
+
+
  //   @SuppressLint("NewApi")
     public class lllogin extends ActionBarActivity {
         EditText un, pw;
@@ -42,7 +49,15 @@ package com.example.user1.myapplication;
                     password=pw.getText().toString();
                 }
             });
-
+            ActionBar ab=getActionBar();
+            TextView textview=new TextView(getApplicationContext());
+            LayoutParams layoutparams = new RelativeLayout.LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT);
+            textview.setLayoutParams(layoutparams);
+            textview.setGravity(Gravity.CENTER);
+            textview.setText(ab.getTitle().toString());
+            textview.setTextSize(20);
+            ab.setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);
+            ab.setCustomView(textview);
           //  setTitle("@string/app_name");
         }
 

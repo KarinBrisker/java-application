@@ -21,12 +21,15 @@ import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.TextView;
 import android.widget.Toast;
-
+import android.widget.RelativeLayout;
+import android.widget.RelativeLayout.LayoutParams;
 import java.util.GregorianCalendar;
 
 
@@ -59,6 +62,15 @@ public class MainActivity extends BaseActivity implements SensorEventListener {
         ft.commit();
 
         sensorManager = (SensorManager) getSystemService(SENSOR_SERVICE);
+        ActionBar ab=getSupportActionBar();
+        TextView textview=new TextView(getApplicationContext());
+        LayoutParams layoutparams = new RelativeLayout.LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT);
+        textview.setLayoutParams(layoutparams);
+        textview.setGravity(Gravity.CENTER);
+        textview.setText(ab.getTitle().toString());
+        textview.setTextSize(20);
+        ab.setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);
+        ab.setCustomView(textview);
 
     }
 
