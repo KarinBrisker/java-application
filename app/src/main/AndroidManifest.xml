@@ -13,11 +13,13 @@
         <activity android:name=".SplashActivity"></activity>
         <activity android:name=".MainActivity"></activity>
         <activity android:name=".ExplainActivity"></activity>
+        <activity android:name=".lllogin"></activity>
+        <activity android:name=".SignupActivity"></activity>
         <activity
             android:name=".LoginActivity"
             android:label="@string/title_activity_login"></activity>
 
-        <activity android:name=".ServerCheck">
+        <activity android:name=".MySplash">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

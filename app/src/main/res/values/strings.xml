@@ -39,7 +39,7 @@
     <string name="explain3">Than you can use this user name for later login, and dont need to sign upevery time. when you login the app, you connect to the server and can send meesages to the server</string>
     <string name="explain4">each time the server get a new message it send it to all of the users that you can see the messages everybody send</string>
     <string name="explain5">Hope you will use this app correct and enjoy it! let Start!</string>
-    <string name="logoUpTab">Our App</string>
+    <string name="logoUpTab">Liron Karin App</string>
     <string name="title_activity_msgs">msgsActivity</string>
     <string name="title_activity_messages">MessagesActivity</string>
     <string name="title_activity_checking">checking</string>

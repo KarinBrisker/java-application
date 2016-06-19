@@ -24,6 +24,7 @@ public class PostsAdapter extends BaseAdapter {
     public PostsAdapter(ActionBarActivity activity, List<Post> feedItems) {
         this.activity = activity;
         this.posts = feedItems;
+
     }
 
     @Override
@@ -58,7 +59,6 @@ public class PostsAdapter extends BaseAdapter {
         TextView url = (TextView) convertView.findViewById(R.id.txtUrl);
 
         Post item = posts.get(position);
-
         ImageView imgPost = (ImageView) convertView.findViewById(R.id.post_imgPost);
         imgPost.setImageResource(item.getImg());
 

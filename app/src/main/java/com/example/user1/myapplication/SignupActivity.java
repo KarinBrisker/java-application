@@ -1,10 +1,12 @@
 package com.example.user1.myapplication;
 
+import android.app.ActionBar;
 import android.os.Bundle;
 import android.app.Activity;
 
 import android.app.ProgressDialog;
 import android.os.Bundle;
+import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
@@ -18,7 +20,7 @@ import android.widget.Toast;
 import butterknife.ButterKnife;
 import butterknife.InjectView;
 
-public class SignupActivity extends Activity {
+public class SignupActivity extends ActionBarActivity {
 
 
     EditText un, em, nn,pw;
@@ -45,6 +47,7 @@ public class SignupActivity extends Activity {
         error = (TextView) findViewById(R.id.tv_error);
 
 
+
         ok.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -61,7 +64,12 @@ public class SignupActivity extends Activity {
                 nn.setText("");
             }
         });
+  //      SetActionBar();
     }
+//    private void SetActionBar(){
+//        ActionBar ab=getActionBar();
+//        ab.setTitle("@string/app_name");
+//    }
 
 
     public boolean validate() {

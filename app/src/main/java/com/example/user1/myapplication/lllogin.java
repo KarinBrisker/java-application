@@ -8,15 +8,17 @@ package com.example.user1.myapplication;
 //    import com.example.firstapp.R;
 
     import android.annotation.SuppressLint;
+    import android.app.ActionBar;
     import android.app.Activity;
     import android.os.Bundle;
+    import android.support.v7.app.ActionBarActivity;
     import android.view.View;
     import android.widget.Button;
     import android.widget.EditText;
     import android.widget.TextView;
 
-    @SuppressLint("NewApi")
-    public class lllogin extends Activity {
+ //   @SuppressLint("NewApi")
+    public class lllogin extends ActionBarActivity {
         EditText un, pw;
         TextView error;
         Button ok;
@@ -40,7 +42,10 @@ package com.example.user1.myapplication;
                     password=pw.getText().toString();
                 }
             });
+
+          //  setTitle("@string/app_name");
         }
+
 
 //            ok.setOnClickListener(new View.OnClickListener() {
 
