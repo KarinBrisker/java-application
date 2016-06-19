@@ -34,10 +34,7 @@
             android:enabled="true"
             android:exported="true" />
 
-        <activity
-            android:name=".sel"
-            android:label="@string/title_activity_sel"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+
     </application>
 
 </manifest>

@@ -1,6 +1,7 @@
 package com.example.user1.myapplication;
 
 import android.app.ActionBar;
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.app.Activity;
@@ -173,6 +174,8 @@ public class SignupActivity extends ActionBarActivity {
         }
 
         ok.setEnabled(false);
+        ServerSign ss=new ServerSign();
+        ss.execute();
     }
 
 
@@ -227,7 +230,14 @@ public class SignupActivity extends ActionBarActivity {
 
         @Override
         protected void onPostExecute(String ansStr) {
-
+            if(ansStr=="sign ok")
+            {
+                Intent i = new Intent(SignupActivity.this, MainActivity.class);
+                startActivity(i);
+            }
+            else if(ansStr=="sign error"){
+                onSignupFailed();
+            }
             //todo - "sign ok" - can continue
             //       "sign error" - cant continue - try again
         }
