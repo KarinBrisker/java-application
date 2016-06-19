@@ -1,5 +1,5 @@
 package com.example.user1.myapplication;
-
+import android.app.Fragment;
 import android.app.Activity;
 import android.app.AlarmManager;
 import android.app.PendingIntent;
@@ -12,11 +12,10 @@ import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
-
+import android.app.FragmentManager;
 import android.support.v4.app.FragmentActivity;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentTransaction;
+import android.app.FragmentTransaction;
+
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
@@ -26,30 +25,36 @@ import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.RelativeLayout;
 import android.widget.RelativeLayout.LayoutParams;
+
+import java.text.DateFormat;
+import java.util.Date;
 import java.util.GregorianCalendar;
+import java.util.List;
 
 
 public class MainActivity extends BaseActivity implements SensorEventListener {
 
     private static final int SHAKE_THRESHOLD = 6000;
-
+    Button postButton;
     SensorManager sensorManager;
     float last_x,last_y,last_z;
     private long lastUpdate;
-
+    EditText post_txt;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
         lastUpdate = System.currentTimeMillis();
-
-        Fragment newFragment = new MainFragment();
-        FragmentManager fm = getSupportFragmentManager();
+        post_txt = (EditText) findViewById(R.id.text_post);
+        final Fragment newFragment = new MainFragment();
+        final FragmentManager fm = getFragmentManager();
         FragmentTransaction ft = fm.beginTransaction();
 
 //        if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE)
@@ -72,6 +77,17 @@ public class MainActivity extends BaseActivity implements SensorEventListener {
         ab.setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);
         ab.setCustomView(textview);
 
+        postButton = (Button) findViewById(R.id.postButton);
+        postButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String new_post=post_txt.getText().toString();
+                MainFragment fragment = (MainFragment)fm.findFragmentById(R.id.mainFragment);
+                String currentDateTimeString = DateFormat.getDateTimeInstance().format(new Date());
+
+                fragment.generateFakePosts(1,"222",currentDateTimeString,new_post);
+            }
+        });
     }
 
     @Override

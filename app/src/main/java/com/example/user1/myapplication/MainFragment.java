@@ -1,12 +1,12 @@
 package com.example.user1.myapplication;
-
+import android.app.Fragment;
 
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
+
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.ActionBarActivity;
 import android.view.LayoutInflater;
@@ -44,9 +44,8 @@ public class MainFragment extends Fragment {
         lstPosts.setAdapter(poststAdapter);
 
 
-
-        generateFakePosts(1, "Supernatural", R.drawable.boy, "27 mins", getResources().getString(R.string.post1), R.drawable.batman);
-        generateFakePosts(1, "9GAG", R.drawable.girl, "9 hrs", "It's Dangerous To Go Alone, So These Animals Decide To Go In Pairs", R.drawable.monkey1);
+        generateFakePosts(1, "Supernatural", "27 mins", getResources().getString(R.string.post1));
+        generateFakePosts(1, "9GAG","9 hrs", "It's Dangerous To Go Alone, So These Animals Decide To Go In Pairs");
 
         poststAdapter.notifyDataSetChanged();
 /*
@@ -89,7 +88,7 @@ public class MainFragment extends Fragment {
     }
 
 
-    private void generateFakePosts(int id, String name, int img, String time, String status, int profile) {
+    public void generateFakePosts(int id, String name, String time, String status) {
         Post item = new Post();
         item.setId(id);
         item.setName(name);
