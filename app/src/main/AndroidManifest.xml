@@ -9,6 +9,7 @@
         android:required="true" />
 
     <application
+        android:name="android.support.multidex.MultiDexApplication"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/logoUpTab"
@@ -16,14 +17,13 @@
         android:name=".App"
         android:theme="@style/AppTheme">
 
-        <activity android:name=".MainActivity" />
+        <activity android:name=".SplashActivity"  />
         <activity android:name=".ExplainActivity" />
+
         <activity android:name=".lllogin" />
+
         <activity android:name=".SignupActivity" />
-        <activity
-            android:name=".LoginActivity"
-            android:label="@string/title_activity_login" />
-        <activity android:name=".SplashActivity">
+        <activity android:name=".MainActivity" android:configChanges="locale">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />

@@ -1,6 +1,5 @@
 package com.example.user1.myapplication;
 
-import android.app.ActionBar;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
@@ -9,10 +8,12 @@ import android.app.Activity;
 
 import android.app.ProgressDialog;
 import android.os.Bundle;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
+import android.view.Window;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RadioButton;
@@ -53,6 +54,7 @@ public class SignupActivity extends AppCompatActivity {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        requestWindowFeature(Window.FEATURE_ACTION_BAR);
         setContentView(R.layout.activity_signup);
         un = (EditText) findViewById(R.id.fullName);
         un.requestFocus();
@@ -98,7 +100,8 @@ public class SignupActivity extends AppCompatActivity {
         });
   //      SetActionBar();
 //
-        ActionBar ab=getActionBar();
+        android.support.v7.app.ActionBar ab=getSupportActionBar();
+
         TextView textview=new TextView(getApplicationContext());
         LayoutParams layoutparams = new RelativeLayout.LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT);
         textview.setLayoutParams(layoutparams);
