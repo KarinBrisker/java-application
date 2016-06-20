@@ -28,16 +28,16 @@ public class NotificationReceiver extends BroadcastReceiver
 
         mNotifyMgr.notify(mNotificationId, mBuilder.build());
 
-//        if (intent.getExtras().getString("sender").equals("one"))
-//        {
-//            AlarmManager alarmMgr = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
-//
-//            Long timeToAlert = new GregorianCalendar().getTimeInMillis() + 5000;
-//
-//            Intent i = new Intent(context, NotificationReceiver.class);
-//            i.putExtra("sender", "one");
-//
-//            alarmMgr.set(AlarmManager.RTC_WAKEUP, timeToAlert, PendingIntent.getBroadcast(context, 0, i, PendingIntent.FLAG_UPDATE_CURRENT));
-//        }
+        if (intent.getExtras().getString("sender").equals("one"))
+        {
+            AlarmManager alarmMgr = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
+
+            Long timeToAlert = new GregorianCalendar().getTimeInMillis() + 5000;
+
+            Intent i = new Intent(context, NotificationReceiver.class);
+            i.putExtra("sender", "one");
+
+            alarmMgr.set(AlarmManager.RTC_WAKEUP, timeToAlert, PendingIntent.getBroadcast(context, 0, i, PendingIntent.FLAG_UPDATE_CURRENT));
+        }
     }
 }
