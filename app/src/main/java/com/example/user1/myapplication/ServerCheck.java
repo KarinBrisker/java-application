@@ -71,8 +71,7 @@ public class ServerCheck extends Activity {
                 String nameStr = "UserName="+name;
                 String msgStr = "&Msg=" + msg;
 
-                String urlStr = "http://10.0.2.2:8080/ServerProj/ServerMsg?" +
-                        nameStr+msgStr;
+                String urlStr = "http://10.0.2.2:8080/ServerProj/ServerLogin?UserName=admin&Password=pass";
                 URL url = new URL(urlStr);
                 HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
                 try {

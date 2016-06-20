@@ -68,12 +68,11 @@ public class SplashActivity extends NoActionBarActivity {
 
                 // else (equals null or not correct
                 // moving to other window
+
                 Intent i = new Intent(SplashActivity.this, ExplainActivity.class);
                 startActivity(i);
             }
         });
-
-
 
         t.start();
     }

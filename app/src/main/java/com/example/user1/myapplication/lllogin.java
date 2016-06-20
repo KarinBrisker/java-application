@@ -1,10 +1,10 @@
 
 
 package com.example.user1.myapplication;
+import android.app.ActionBar;
     import java.io.BufferedInputStream;
     import java.io.BufferedReader;
     import java.io.IOException;
-    import android.support.v7.app.ActionBar;
     import java.io.InputStream;
     import java.io.InputStreamReader;
     import java.net.HttpURLConnection;
@@ -81,10 +81,12 @@ import com.example.user1.myapplication.R;
                     name=un.getText().toString();
                     password=pw.getText().toString();
 
-
-//                    TODO:To send to server, try to log in
-//                    ServerLogin sl=new ServerLogin();
-//                    sl.execute();
+                    SharedPreferences settings = getApplicationContext().getSharedPreferences("mySettings", 0);
+                    SharedPreferences.Editor editor = settings.edit();
+                    editor.putString("NAME",name);
+//                    //send to server
+                    ServerLogin ser = new ServerLogin();
+                    ser.execute();
 
                 }
             });
@@ -139,6 +141,9 @@ import com.example.user1.myapplication.R;
          @Override
          protected void onPostExecute(String ansStr) {
              if(ansStr.equals("login ok")){
+                 //get coockies
+                 CookieGet ck = new CookieGet();
+
                  // if ok we keep the parameters in the phone
                  SharedPreferences settings = getApplicationContext().getSharedPreferences("mySettings", 0);
                  SharedPreferences.Editor editor = settings.edit();
