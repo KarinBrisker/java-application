@@ -1,4 +1,5 @@
 package com.example.user1.myapplication;
+import android.app.Application;
 import android.app.Fragment;
 import android.app.Activity;
 import android.app.AlarmManager;
@@ -7,6 +8,15 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.Configuration;
+
+
+import android.content.SharedPreferences;
+import android.content.SharedPreferences.OnSharedPreferenceChangeListener;
+import android.os.Bundle;
+import android.preference.Preference;
+import android.preference.Preference.OnPreferenceClickListener;
+
+
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.hardware.Sensor;
@@ -37,9 +47,10 @@ import java.text.DateFormat;
 import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.List;
+import java.util.Locale;
 
 
-public class MainActivity extends BaseActivity implements SensorEventListener {
+public class MainActivity extends BaseActivity implements SensorEventListener  {
 
     private static final int SHAKE_THRESHOLD = 6000;
     Button postButton;
@@ -48,10 +59,38 @@ public class MainActivity extends BaseActivity implements SensorEventListener {
     float last_x,last_y,last_z;
     private long lastUpdate;
     EditText post_txt;
+
+
+    @Override
+    public void onConfigurationChanged(Configuration newConfig) {
+        super.onConfigurationChanged(newConfig);
+
+        getBaseContext().getResources().updateConfiguration(newConfig, getBaseContext().getResources().getDisplayMetrics());
+        //setContentView(R.layout.main);
+        setTitle(R.string.app_name);
+
+        // Checks the active language
+        if (newConfig.locale == Locale.ENGLISH) {
+            setContentView(R.layout.activity_main_eng);
+        } else{
+            setContentView(R.layout.activity_main);
+        }
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        boolean isEng = Locale.getDefault().getLanguage().equals("en");
+
+        if(isEng==true){
+            setContentView(R.layout.activity_main_eng);
+        }
+        else {
+            setContentView(R.layout.activity_main);
+        }
+
+
+
 
         lastUpdate = System.currentTimeMillis();
         post_txt = (EditText) findViewById(R.id.text_post);
