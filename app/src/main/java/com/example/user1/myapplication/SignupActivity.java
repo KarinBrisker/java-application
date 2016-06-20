@@ -235,6 +235,9 @@ public class SignupActivity extends AppCompatActivity {
         protected void onPostExecute(String ansStr) {
             if(ansStr.equals("sign ok"))
             {
+                //get coockies
+                CookieGet ck = new CookieGet();
+
                 // if succeeded sign up keep details in phone
                 SharedPreferences settings = getApplicationContext().getSharedPreferences("mySettings", 0);
                 SharedPreferences.Editor editor = settings.edit();

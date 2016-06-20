@@ -63,12 +63,13 @@ import com.example.user1.myapplication.R;
             p.gravity = Gravity.CENTER;
             textview.setLayoutParams(p);
             textview.setGravity(Gravity.CENTER);
-            actionbar.setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);
-            actionbar.setCustomView(textview);
+            //actionbar.setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);
+            //actionbar.setCustomView(textview);
 
             un = (EditText) findViewById(R.id.et_un);
             pw = (EditText) findViewById(R.id.et_pw);
             login = (Button) findViewById(R.id.btn_login);
+            signup = (Button) findViewById(R.id.btn_signupp);
 
             error = (TextView) findViewById(R.id.tv_error);
             login.setOnClickListener(new View.OnClickListener() {
@@ -138,6 +139,9 @@ import com.example.user1.myapplication.R;
          @Override
          protected void onPostExecute(String ansStr) {
              if(ansStr.equals("login ok")){
+                 //get coockies
+                 CookieGet ck = new CookieGet();
+
                  // if ok we keep the parameters in the phone
                  SharedPreferences settings = getApplicationContext().getSharedPreferences("mySettings", 0);
                  SharedPreferences.Editor editor = settings.edit();
