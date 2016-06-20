@@ -25,6 +25,7 @@ package com.example.user1.myapplication;
     import android.os.Bundle;
     import android.support.v7.app.ActionBarActivity;
     import android.view.View;
+    import android.view.ViewGroup;
     import android.widget.Button;
     import android.widget.EditText;
     import android.widget.TextView;
@@ -43,7 +44,8 @@ import com.example.user1.myapplication.R;
     public class lllogin extends ActionBarActivity {
         EditText un, pw;
         TextView error;
-        Button ok;
+        Button login;
+        Button signup;
         private String name,password;
         private String resp;
         private String errorMsg;
