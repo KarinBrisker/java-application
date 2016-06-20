@@ -1,6 +1,8 @@
 package com.example.user1.myapplication;
 
 import android.app.ActionBar;
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.app.Activity;
@@ -35,7 +37,7 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 
 
-public class SignupActivity extends ActionBarActivity {
+public class SignupActivity extends AppCompatActivity {
 
 
     EditText un, em, nn,pw;
@@ -96,15 +98,15 @@ public class SignupActivity extends ActionBarActivity {
         });
   //      SetActionBar();
 //
-//        ActionBar ab=getActionBar();
-//        TextView textview=new TextView(getApplicationContext());
-//        LayoutParams layoutparams = new RelativeLayout.LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT);
-//        textview.setLayoutParams(layoutparams);
-//        textview.setGravity(Gravity.CENTER);
-//        textview.setText(ab.getTitle().toString());
-//        textview.setTextSize(20);
-//        ab.setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);
-//        ab.setCustomView(textview);
+        ActionBar ab=getActionBar();
+        TextView textview=new TextView(getApplicationContext());
+        LayoutParams layoutparams = new RelativeLayout.LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT);
+        textview.setLayoutParams(layoutparams);
+        textview.setGravity(Gravity.CENTER);
+        textview.setText(ab.getTitle().toString());
+        textview.setTextSize(20);
+        ab.setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);
+        ab.setCustomView(textview);
 
 
     }
@@ -173,6 +175,10 @@ public class SignupActivity extends ActionBarActivity {
         }
 
         ok.setEnabled(false);
+        // TODO: Need to send to server. if good: session
+        //
+//        ServerSign ss=new ServerSign();
+//        ss.execute();
     }
 
 
@@ -227,11 +233,23 @@ public class SignupActivity extends ActionBarActivity {
 
         @Override
         protected void onPostExecute(String ansStr) {
-
+            if(ansStr.equals("sign ok"))
+            {
+                // if succeeded sign up keep details in phone
+                SharedPreferences settings = getApplicationContext().getSharedPreferences("mySettings", 0);
+                SharedPreferences.Editor editor = settings.edit();
+                editor.putString("NAME",user_name);
+                editor.putString("PASSWORD",password);
+// Apply the edits!
+                editor.apply();
+                Intent i = new Intent(SignupActivity.this, MainActivity.class);
+                startActivity(i);
+            }
+            else if(ansStr.equals("sign error")){
+                onSignupFailed();
+            }
             //todo - "sign ok" - can continue
             //       "sign error" - cant continue - try again
         }
     }
-
-
 }

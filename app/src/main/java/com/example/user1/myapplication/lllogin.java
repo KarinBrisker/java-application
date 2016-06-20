@@ -1,3 +1,5 @@
+
+
 package com.example.user1.myapplication;
 
     import java.io.BufferedInputStream;
@@ -32,6 +34,9 @@ package com.example.user1.myapplication;
     import android.view.Gravity;
     import android.widget.RelativeLayout;
     import android.widget.RelativeLayout.LayoutParams;
+import android.widget.Toast;
+
+import com.example.user1.myapplication.R;
 
 
  //   @SuppressLint("NewApi")
@@ -48,89 +53,47 @@ package com.example.user1.myapplication;
         public void onCreate(Bundle savedInstanceState) {
             super.onCreate(savedInstanceState);
             setContentView(R.layout.activity_lllogin);
+
+            ActionBar actionbar=this.getActionBar();
+            TextView textview = new TextView(getApplicationContext());
+            ActionBar.LayoutParams p = new ActionBar.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
+                    ViewGroup.LayoutParams.MATCH_PARENT);
+            p.gravity = Gravity.CENTER;
+            textview.setLayoutParams(p);
+            textview.setGravity(Gravity.CENTER);
+            actionbar.setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);
+            actionbar.setCustomView(textview);
+
             un = (EditText) findViewById(R.id.et_un);
             pw = (EditText) findViewById(R.id.et_pw);
-            ok = (Button) findViewById(R.id.btn_login);
-            error = (TextView) findViewById(R.id.tv_error);
+            login = (Button) findViewById(R.id.btn_login);
 
-            ok.setOnClickListener(new View.OnClickListener() {
+            error = (TextView) findViewById(R.id.tv_error);
+            login.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     name=un.getText().toString();
                     password=pw.getText().toString();
 
-                    //send to server
+                    SharedPreferences settings = getApplicationContext().getSharedPreferences("mySettings", 0);
+                    SharedPreferences.Editor editor = settings.edit();
+                    editor.putString("NAME",name);
+
+//                    //send to server
                     ServerLogin ser = new ServerLogin();
                     ser.execute();
 
-                    //SharedPreferences settings = getApplicationContext().getSharedPreferences("mySettings", 0);
-                    //SharedPreferences.Editor editor = settings.edit();
-                    //editor.putString("NAME",name);
-
-// Apply the edits!
-                    //editor.apply();
-                    //Intent i = new Intent(lllogin.this, MainActivity.class);
-                    //startActivity(i);
-
                 }
             });
-//            ActionBar ab=getActionBar();
-//            TextView textview=new TextView(getApplicationContext());
-//            LayoutParams layoutparams = new RelativeLayout.LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT);
-//            textview.setLayoutParams(layoutparams);
-//            textview.setGravity(Gravity.CENTER);
-//            textview.setText(ab.getTitle().toString());
-//            textview.setTextSize(20);
-//            ab.setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);
-//            ab.setCustomView(textview);
-          //  setTitle("@string/app_name");
+            signup.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent i = new Intent(lllogin.this, SignupActivity.class);
+                    startActivity(i);
+                }
+            });
 
         }
-
-
-//            ok.setOnClickListener(new View.OnClickListener() {
-
-//                @Override
-//                public void onClick(View v) {
-//                    /** According with the new StrictGuard policy,  running long tasks on the Main UI thread is not possible
-//                     So creating new thread to create and execute http operations */
-//                    new Thread(new Runnable() {
-//
-//                        @Override
-//                        public void run() {
-//                            ArrayList<NameValuePair> postParameters = new ArrayList<NameValuePair>();
-//                            postParameters.add(new BasicNameValuePair("username",un.getText().toString()));
-//                            postParameters.add(new BasicNameValuePair("password",pw.getText().toString()));
-//
-//                            String response = null;
-//                            try {
-//                                response = SimpleHttpClient.executeHttpPost("http://192.168.1.3:8084/LoginServer/login.do", postParameters);
-//                                String res = response.toString();
-//                                resp = res.replaceAll("\\s+", "");
-//
-//                            } catch (Exception e) {
-//                                e.printStackTrace();
-//                                errorMsg = e.getMessage();
-//                            }
-//                        }
-//
-//                    }).start();
-//                    try {
-//                        /** wait a second to get response from server */
-//                        Thread.sleep(1000);
-//                        /** Inside the new thread we cannot update the main thread
-//                         So updating the main thread outside the new thread */
-//
-//                        error.setText(resp);
-//
-//                        if (null != errorMsg && !errorMsg.isEmpty()) {
-//                            error.setText(errorMsg);
-//                        }
-//                    } catch (Exception e) {
-//                        error.setText(e.getMessage());
-//                    }
-//                }
-//            });
 
 
      /***
@@ -150,7 +113,6 @@ package com.example.user1.myapplication;
 
                  String urlStr = "http://10.0.2.2:8080/ServerProj/ServerLogin?" +
                          userStr+passStr;
-
                  URL url = new URL(urlStr);
                  HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
                  try {
@@ -173,14 +135,22 @@ package com.example.user1.myapplication;
 
          @Override
          protected void onPostExecute(String ansStr) {
-
              if(ansStr.equals("login ok")){
-                 Intent i = new Intent(lllogin.this, MainActivity.class);
-                 startActivity(i);
-             }else{
-                 un.setText("error try again");
-                 pw.setText("");
-             }
+                 // if ok we keep the parameters in the phone
+                 SharedPreferences settings = getApplicationContext().getSharedPreferences("mySettings", 0);
+                 SharedPreferences.Editor editor = settings.edit();
+                 editor.putString("NAME",name);
+                 editor.putString("PASSWORD",password);
+// Apply the edits!
+                 editor.apply();
+                     Intent i = new Intent(lllogin.this, MainActivity.class);
+                     startActivity(i);
+                 }
+                 else if(ansStr.equals("sign error")){
+                 Toast.makeText(getBaseContext(), "Try Again", Toast.LENGTH_LONG).show();
+                 }
+             //todo - "login ok" - can continue
+             //       "login error" - cant continue - try again
          }
      }
 
