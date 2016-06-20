@@ -1,10 +1,10 @@
 
 
 package com.example.user1.myapplication;
-import android.app.ActionBar;
     import java.io.BufferedInputStream;
     import java.io.BufferedReader;
     import java.io.IOException;
+    import android.support.v7.app.ActionBar;
     import java.io.InputStream;
     import java.io.InputStreamReader;
     import java.net.HttpURLConnection;
@@ -17,7 +17,7 @@ import android.app.ActionBar;
 //    import com.example.firstapp.R;
 
     import android.annotation.SuppressLint;
-    import android.app.ActionBar;
+   // import android.app.ActionBar;
     import android.app.Activity;
     import android.content.Intent;
     import android.content.SharedPreferences;
@@ -27,7 +27,8 @@ import android.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
+    import android.view.Window;
+    import android.widget.Button;
     import android.widget.EditText;
     import android.widget.TextView;
 
@@ -54,22 +55,25 @@ import com.example.user1.myapplication.R;
         @Override
         public void onCreate(Bundle savedInstanceState) {
             super.onCreate(savedInstanceState);
+            requestWindowFeature(Window.FEATURE_ACTION_BAR);
             setContentView(R.layout.activity_lllogin);
-
-            ActionBar actionbar=this.getActionBar();
+            android.support.v7.app.ActionBar actionbar = getSupportActionBar();
+        //    ActionBar actionbar=this.getActionBar();
             TextView textview = new TextView(getApplicationContext());
             ActionBar.LayoutParams p = new ActionBar.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
                     ViewGroup.LayoutParams.MATCH_PARENT);
             p.gravity = Gravity.CENTER;
             textview.setLayoutParams(p);
             textview.setGravity(Gravity.CENTER);
+            textview.setText(actionbar.getTitle().toString());
+            textview.setTextSize(20);
             actionbar.setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);
             actionbar.setCustomView(textview);
 
             un = (EditText) findViewById(R.id.et_un);
             pw = (EditText) findViewById(R.id.et_pw);
             login = (Button) findViewById(R.id.btn_login);
-
+            signup=(Button)findViewById(R.id.btn_signupp);
             error = (TextView) findViewById(R.id.tv_error);
             login.setOnClickListener(new View.OnClickListener() {
                 @Override

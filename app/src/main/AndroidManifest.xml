@@ -18,11 +18,10 @@
 
         <activity android:name=".SplashActivity"  />
         <activity android:name=".ExplainActivity" />
+
         <activity android:name=".lllogin" />
+
         <activity android:name=".SignupActivity" />
-        <activity
-            android:name=".LoginActivity"
-            android:label="@string/title_activity_login" />
         <activity android:name=".MainActivity" android:configChanges="locale">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
