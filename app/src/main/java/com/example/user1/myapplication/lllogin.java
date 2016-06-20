@@ -52,20 +52,25 @@ package com.example.user1.myapplication;
             pw = (EditText) findViewById(R.id.et_pw);
             ok = (Button) findViewById(R.id.btn_login);
             error = (TextView) findViewById(R.id.tv_error);
+
             ok.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     name=un.getText().toString();
                     password=pw.getText().toString();
 
-                    SharedPreferences settings = getApplicationContext().getSharedPreferences("mySettings", 0);
-                    SharedPreferences.Editor editor = settings.edit();
-                    editor.putString("NAME",name);
+                    //send to server
+                    ServerLogin ser = new ServerLogin();
+                    ser.execute();
+
+                    //SharedPreferences settings = getApplicationContext().getSharedPreferences("mySettings", 0);
+                    //SharedPreferences.Editor editor = settings.edit();
+                    //editor.putString("NAME",name);
 
 // Apply the edits!
-                    editor.apply();
-                    Intent i = new Intent(lllogin.this, MainActivity.class);
-                    startActivity(i);
+                    //editor.apply();
+                    //Intent i = new Intent(lllogin.this, MainActivity.class);
+                    //startActivity(i);
 
                 }
             });
@@ -145,6 +150,7 @@ package com.example.user1.myapplication;
 
                  String urlStr = "http://10.0.2.2:8080/ServerProj/ServerLogin?" +
                          userStr+passStr;
+
                  URL url = new URL(urlStr);
                  HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
                  try {
@@ -168,8 +174,13 @@ package com.example.user1.myapplication;
          @Override
          protected void onPostExecute(String ansStr) {
 
-             //todo - "login ok" - can continue
-             //       "login error" - cant continue - try again
+             if(ansStr.equals("login ok")){
+                 Intent i = new Intent(lllogin.this, MainActivity.class);
+                 startActivity(i);
+             }else{
+                 un.setText("error try again");
+                 pw.setText("");
+             }
          }
      }
 
