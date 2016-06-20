@@ -152,7 +152,7 @@ import com.example.user1.myapplication.R;
                      Intent i = new Intent(lllogin.this, MainActivity.class);
                      startActivity(i);
                  }
-                 else if(ansStr.equals("sign error")){
+                 else if(ansStr.equals("login error")){
                  Toast.makeText(getBaseContext(), "Try Again", Toast.LENGTH_LONG).show();
                  }
              //todo - "login ok" - can continue

@@ -2,14 +2,27 @@ package com.example.user1.myapplication;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import java.io.BufferedInputStream;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.URL;
 import java.util.Random;
 
 public class SplashActivity extends NoActionBarActivity {
     ProgressBar bar;
+    String name;
+    String pass;
+    Thread t;
+    int finish = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -21,7 +34,7 @@ public class SplashActivity extends NoActionBarActivity {
 
 
     private void startMessage() {
-        Thread t = new Thread(new Runnable() {
+        t = new Thread(new Runnable() {
             @Override
             public void run() {
                 String msg = "";
@@ -55,25 +68,92 @@ public class SplashActivity extends NoActionBarActivity {
                     }
                 }
 
-                SharedPreferences settings = getApplicationContext().getSharedPreferences("mySettings", 0);
-//                TODO: to get from phone details and try to log in
-//                String name = settings.getString("NAME", null);
-//                String password=settings.getString("PASSWORD", null);
-                // TODO: to check is name& password are not null
-                //// TODO: then to check if are correct!!! 
-                // if there is connection
-//                Intent i = new Intent(SplashActivity.this, MainActivity.class);
-//                startActivity(i);
-
-
-                // else (equals null or not correct
-                // moving to other window
-
-                Intent i = new Intent(SplashActivity.this, ExplainActivity.class);
-                startActivity(i);
+                finish = 1;
             }
         });
 
         t.start();
+
+
+
+        SharedPreferences settings = getApplicationContext().getSharedPreferences("mySettings", 0);
+        //get from the phone the user and pass if have
+        name = settings.getString("NAME", null);
+        pass=settings.getString("PASSWORD", null);
+
+        if(name!=null && pass!=null ){
+            //check if they are correct - send them to server
+            //if yes we move to main window
+            ServerLogin ser = new ServerLogin();
+            ser.execute();
+        }
+        //else - doing nothing - wait for the thread to go to explain window
+
     }
+
+
+
+
+
+
+    /***
+     * the server
+     */
+    public class ServerLogin extends AsyncTask<Void, Void, String> {
+
+
+        ServerLogin(){
+        }
+
+        @Override
+        protected String doInBackground(Void... params) {
+            try {
+                String userStr = "UserName="+name;
+                String passStr = "&Password=" + pass;
+
+                String urlStr = "http://10.0.2.2:8080/ServerProj/ServerLogin?" +
+                        userStr+passStr;
+                URL url = new URL(urlStr);
+                HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
+                try {
+                    InputStream in = new BufferedInputStream(urlConnection.getInputStream());
+                    BufferedReader streamReader = new BufferedReader(new InputStreamReader(in, "UTF-8"));
+                    StringBuilder responseStrBuilder = new StringBuilder();
+                    String getStr = streamReader.readLine();
+                    return getStr;
+                } catch (IOException e) {
+                    e.printStackTrace();
+                } finally {
+                    urlConnection.disconnect();
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            return null;
+        }
+
+
+        @Override
+        protected void onPostExecute(String ansStr) {
+            while(finish!=1){};
+            if(ansStr.equals("login ok")){
+
+                //get coockies
+                CookieGet ck = new CookieGet();
+
+                //move to main window
+                Intent i = new Intent(SplashActivity.this, MainActivity.class);
+                startActivity(i);
+            }
+            else if(ansStr.equals("login error")){
+                Intent i = new Intent(SplashActivity.this, ExplainActivity.class);
+                startActivity(i);
+
+            }
+        }
+    }
+
+
+
+
 }
