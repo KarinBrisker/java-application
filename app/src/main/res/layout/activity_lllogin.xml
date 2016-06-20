@@ -6,7 +6,6 @@ android:fitsSystemWindows="true"
 android:background="@drawable/splash_bg">
 
 
-
 <!--android:layout_width="fill_parent"-->
     <!--android:layout_height="510dip"-->
     <!--android:layout_marginTop="10dip"-->
@@ -24,7 +23,7 @@ android:background="@drawable/splash_bg">
         android:layout_height="wrap_content"
         android:textSize="10pt"
         android:textColor="#444444"
-        android:text="User Name:"
+        android:text="@string/usrName"
         android:layout_alignTop="@+id/tv_error"
         android:layout_alignLeft="@+id/tv_pw"
         android:layout_alignStart="@+id/tv_pw" />
@@ -48,7 +47,7 @@ android:background="@drawable/splash_bg">
         android:layout_marginRight="9dip"
         android:layout_marginTop="15dip"
         android:layout_marginLeft="10dip"
-        android:text="Password:"/>
+        android:text="@string/password"/>
     <EditText
         android:id="@+id/et_pw"
         android:layout_width="150dip"
@@ -66,7 +65,7 @@ android:background="@drawable/splash_bg">
         android:layout_alignParentLeft="true"
         android:layout_marginTop="15dip"
         android:layout_marginLeft="160dip"
-        android:text="Login" />
+        android:text="@string/login" />
     <Button
         android:id="@+id/btn_signupp"
         android:layout_width="100dip"
@@ -75,7 +74,7 @@ android:background="@drawable/splash_bg">
         android:layout_alignParentLeft="true"
         android:layout_marginTop="15dip"
         android:layout_marginLeft="160dip"
-        android:text="Sign Up" />
+        android:text="@string/signUp" />
     <TextView
         android:id="@+id/tv_error"
         android:layout_width="400dip"

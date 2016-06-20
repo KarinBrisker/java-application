@@ -38,7 +38,7 @@ public class MessagesActivity extends AppCompatActivity {
         private BroadcastReceiver receiver = new BroadcastReceiver() {
             @Override
             public void onReceive(Context context, Intent intent) {
-                Toast.makeText(getApplicationContext(), "received", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(), getResources().getString(R.string.recieved), Toast.LENGTH_SHORT).show();
             }
         };
 

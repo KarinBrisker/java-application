@@ -14,7 +14,6 @@
         android:icon="@mipmap/ic_launcher"
         android:label="@string/logoUpTab"
         android:supportsRtl="true"
-        android:name=".App"
         android:theme="@style/AppTheme">
 
         <activity android:name=".SplashActivity"  />
@@ -35,10 +34,7 @@
             android:enabled="true"
             android:exported="true" />
 
-        <activity
-            android:name=".sel"
-            android:label="@string/title_activity_sel"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+
     </application>
 
 </manifest>

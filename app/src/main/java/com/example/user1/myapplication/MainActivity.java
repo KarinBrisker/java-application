@@ -89,14 +89,15 @@ public class MainActivity extends BaseActivity  {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        boolean isEng = Locale.getDefault().getLanguage().equals("en");
-        String lan=Locale.getDefault().getLanguage().toString();
-        if(isEng==true){
-            setContentView(R.layout.activity_main_eng);
-        }
-        else {
-            setContentView(R.layout.activity_main);
-        }
+        setContentView(R.layout.activity_main_eng);
+//        boolean isEng = Locale.getDefault().getLanguage().equals("en");
+//        String lan=Locale.getDefault().getLanguage().toString();
+//        if(isEng==true){
+//            setContentView(R.layout.activity_main_eng);
+//        }
+//        else {
+//            setContentView(R.layout.activity_main);
+//        }
         sensorMgr = (SensorManager) getSystemService(SENSOR_SERVICE);
         accelerometer = sensorMgr.getDefaultSensor(SensorManager.SENSOR_ACCELEROMETER);
         listener = new ShakeListener();
@@ -148,21 +149,21 @@ public class MainActivity extends BaseActivity  {
         });
     }
 
-    @Override
-    public void onConfigurationChanged(Configuration newConfig) {
-        super.onConfigurationChanged(newConfig);
-
-        getBaseContext().getResources().updateConfiguration(newConfig, getBaseContext().getResources().getDisplayMetrics());
-        //setContentView(R.layout.main);
-        setTitle(R.string.app_name);
-
-        // Checks the active language
-        if (newConfig.locale == Locale.ENGLISH) {
-            setContentView(R.layout.activity_main_eng);
-        } else{
-            setContentView(R.layout.activity_main);
-        }
-    }
+//    @Override
+//    public void onConfigurationChanged(Configuration newConfig) {
+//        super.onConfigurationChanged(newConfig);
+//
+//        getBaseContext().getResources().updateConfiguration(newConfig, getBaseContext().getResources().getDisplayMetrics());
+//        //setContentView(R.layout.main);
+//        setTitle(R.string.app_name);
+//
+//        // Checks the active language
+//        if (newConfig.locale == Locale.ENGLISH) {
+//            setContentView(R.layout.activity_main_eng);
+//        } else{
+//            setContentView(R.layout.activity_main);
+//        }
+//    }
 
 
     @Override
@@ -199,7 +200,8 @@ public class MainActivity extends BaseActivity  {
                     if ((++mShakeCount >= SHAKE_COUNT) && (now - mLastShake > SHAKE_DURATION)) {
                         mLastShake = now;
                         mShakeCount = 0;
-                        Toast.makeText(MainActivity.this, "Loading...!", Toast.LENGTH_LONG).show();
+
+                        Toast.makeText(MainActivity.this, getResources().getString(R.string.loading), Toast.LENGTH_LONG).show();
                         // TODO:to check if there is new data from server
 
                         // if there is, add it

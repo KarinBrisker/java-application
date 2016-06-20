@@ -127,7 +127,7 @@ public class SignupActivity extends AppCompatActivity {
         String password = pw.getText().toString();
         String nickname=nn.getText().toString();
         if (name.isEmpty() || name.length() < 1) {
-            un.setError("at least one character");
+            un.setError(getResources().getString(R.string.lenError));
             valid = false;
         } else {
             un.setError(null);
@@ -135,7 +135,7 @@ public class SignupActivity extends AppCompatActivity {
         }
 
         if (nickname.isEmpty() || nickname.length() < 1) {
-            nn.setError("at least one character");
+            nn.setError(getResources().getString(R.string.lenError));
             valid = false;
         } else {
             nn.setError(null);
@@ -143,7 +143,7 @@ public class SignupActivity extends AppCompatActivity {
         }
 
         if (email.isEmpty() || !android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
-            em.setError("enter a valid email address");
+            em.setError(getResources().getString(R.string.emailError));
             valid = false;
         } else {
             em.setError(null);
@@ -151,7 +151,7 @@ public class SignupActivity extends AppCompatActivity {
         }
 
         if (password.isEmpty() || password.length() < 1 || password.length() > 10) {
-            pw.setError("between 1 and 10 alphanumeric characters");
+            pw.setError(getResources().getString(R.string.passwordError));
             valid = false;
         } else {
             pw.setError(null);
@@ -186,7 +186,7 @@ public class SignupActivity extends AppCompatActivity {
 
 
     public void onSignupFailed() {
-        Toast.makeText(getBaseContext(), "Login failed", Toast.LENGTH_LONG).show();
+        Toast.makeText(getBaseContext(), getResources().getString(R.string.loginFailed), Toast.LENGTH_LONG).show();
 
         ok.setEnabled(true);
     }
