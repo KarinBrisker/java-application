@@ -86,18 +86,12 @@ public class MainActivity extends BaseActivity  {
     float last_x,last_y,last_z;
     private long lastUpdate;
     private EditText post_txt;
+    private  AlarmManager alarmMgr=null;
+   private PendingIntent pi = null;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_eng);
-//        boolean isEng = Locale.getDefault().getLanguage().equals("en");
-//        String lan=Locale.getDefault().getLanguage().toString();
-//        if(isEng==true){
-//            setContentView(R.layout.activity_main_eng);
-//        }
-//        else {
-//            setContentView(R.layout.activity_main);
-//        }
         sensorMgr = (SensorManager) getSystemService(SENSOR_SERVICE);
         accelerometer = sensorMgr.getDefaultSensor(SensorManager.SENSOR_ACCELEROMETER);
         listener = new ShakeListener();
@@ -135,7 +129,13 @@ public class MainActivity extends BaseActivity  {
                     // TODO: To update the server
                 }
             });
-
+         alarmMgr = (AlarmManager)getSystemService(Context.ALARM_SERVICE);
+      //  Long timeToAlert = new GregorianCalendar().getTimeInMillis() + 5000*60;
+        Intent intent = new Intent(this, NotificationReceiver.class);
+              //  intent.putExtra("sender", "one");
+        pi=PendingIntent.getBroadcast(this, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
+        alarmMgr.setRepeating(AlarmManager.RTC_WAKEUP, new GregorianCalendar().getTimeInMillis(),5000*60, pi);
+      //  Toast.makeText(this, "Alarms were set", Toast.LENGTH_SHORT).show();
     }
 
     private void changeActivity(int btnResource, final Class<?> activityClass) {
@@ -148,22 +148,6 @@ public class MainActivity extends BaseActivity  {
             }
         });
     }
-
-//    @Override
-//    public void onConfigurationChanged(Configuration newConfig) {
-//        super.onConfigurationChanged(newConfig);
-//
-//        getBaseContext().getResources().updateConfiguration(newConfig, getBaseContext().getResources().getDisplayMetrics());
-//        //setContentView(R.layout.main);
-//        setTitle(R.string.app_name);
-//
-//        // Checks the active language
-//        if (newConfig.locale == Locale.ENGLISH) {
-//            setContentView(R.layout.activity_main_eng);
-//        } else{
-//            setContentView(R.layout.activity_main);
-//        }
-//    }
 
 
     @Override
@@ -178,7 +162,11 @@ public class MainActivity extends BaseActivity  {
     protected void onPause() {
         super.onPause();
         sensorMgr.unregisterListener(listener);
+        if(alarmMgr!=null&&pi!=null){
+            alarmMgr.cancel(pi);
+        }
     }
+
 
     class ShakeListener implements SensorEventListener{
         private static final int FORCE_THRESHOLD = 1500, TIME_THRESHOLD = 100, SHAKE_TIMEOUT = 500;

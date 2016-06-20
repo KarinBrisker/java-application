@@ -57,11 +57,7 @@ public class MainFragment extends Fragment {
                 getActivity().startService(intent);
             }
         });
-////        swipeLayout.setColorScheme(getResources().getColor(android.R.color.holo_blue_bright),
-////                getResources().getColor(android.R.color.holo_green_light),
-////                        getResources().getColor(android.R.color.holo_orange_light),
-////                                getResources().getColor(android.R.color.holo_red_light));
-//
+
         IntentFilter intentFilter = new IntentFilter();
         intentFilter.addAction(ReloadService.DONE);
         getActivity().registerReceiver(reloadDone, intentFilter);
@@ -73,7 +69,7 @@ public class MainFragment extends Fragment {
         @Override
         public void onReceive(Context context, Intent intent) {
             swipeLayout.setRefreshing(false);
-            Toast.makeText(getActivity(), "Reload is done", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getActivity(), getResources().getString(R.string.msgLoad), Toast.LENGTH_SHORT).show();
 
             // TODO: Load 10 more messages
         }

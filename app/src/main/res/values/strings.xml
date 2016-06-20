@@ -58,8 +58,9 @@
     <string name="signUp">Sign Up</string>
     <string name="post">Post</string>
     <string name="feeds">Feeds</string>
-
-
+    <string name="msgLoad">Load more messages</string>
+    <string name="notiTitle">New messages</string>
+    <string name="notiContent">go to app :)</string>
 
 
 </resources>

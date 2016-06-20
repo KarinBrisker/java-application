@@ -49,8 +49,9 @@
     <string name="signUp">הרשמה</string>
     <string name="post">פרסם</string>
     <string name="feeds">עדכונים</string>
-
-
+    <string name="msgLoad">טוען הודעות נוספות</string>
+    <string name="notiTitle">יש הודעות חדשות</string>
+    <string name="notiContent">היכנס לאפליקציה :)</string>
 
 
 </resources>

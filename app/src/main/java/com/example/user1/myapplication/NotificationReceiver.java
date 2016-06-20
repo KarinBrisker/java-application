@@ -15,11 +15,14 @@ public class NotificationReceiver extends BroadcastReceiver
 
     @Override
     public void onReceive(Context context, Intent intent) {
+        // TODO: To check if there are new messages with server
+        // TODO:if there are:(code below) else: nothing
+
         NotificationCompat.Builder mBuilder =
                 new NotificationCompat.Builder(context)
                         .setSmallIcon(R.mipmap.ic_launcher)
-                        .setContentTitle("My notification")
-                        .setContentText(intent.getExtras().getString("sender"));
+                        .setContentTitle(context.getResources().getString(R.string.notiTitle))
+                        .setContentText(context.getResources().getString(R.string.notiContent));
 
         int mNotificationId = 001;
 
@@ -28,16 +31,5 @@ public class NotificationReceiver extends BroadcastReceiver
 
         mNotifyMgr.notify(mNotificationId, mBuilder.build());
 
-        if (intent.getExtras().getString("sender").equals("one"))
-        {
-            AlarmManager alarmMgr = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
-
-            Long timeToAlert = new GregorianCalendar().getTimeInMillis() + 5000;
-
-            Intent i = new Intent(context, NotificationReceiver.class);
-            i.putExtra("sender", "one");
-
-            alarmMgr.set(AlarmManager.RTC_WAKEUP, timeToAlert, PendingIntent.getBroadcast(context, 0, i, PendingIntent.FLAG_UPDATE_CURRENT));
-        }
     }
 }
