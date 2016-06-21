@@ -6,8 +6,6 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.widget.ProgressBar;
 import android.widget.TextView;
-import android.widget.Toast;
-
 import java.io.BufferedInputStream;
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -15,8 +13,13 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
-import java.util.Random;
 
+/**
+ * the splash activity
+ * shoe four meeesage than if we have user
+ * and pass check them with the server
+ * if not go to login window
+ */
 public class SplashActivity extends NoActionBarActivity {
     ProgressBar bar;
     String name;
@@ -32,11 +35,14 @@ public class SplashActivity extends NoActionBarActivity {
         startMessage();
     }
 
-
+    /**
+     * start the new thread to run the messages
+     */
     private void startMessage() {
         t = new Thread(new Runnable() {
             @Override
             public void run() {
+
                 String msg = "";
                 for(int i =0; i<4; i++) {
                     //message
@@ -68,32 +74,32 @@ public class SplashActivity extends NoActionBarActivity {
                     }
                 }
 
-                finish = 1;
+                Thread d = new Thread(new Runnable() {
+                    @Override
+                    public void run() {
+                        SharedPreferences settings = getApplicationContext().getSharedPreferences("mySettings", 0);
+                        //get from the phone the user and pass if have
+                        name = settings.getString("NAME", null);
+                        pass=settings.getString("PASSWORD", null);
+
+                        if(name!=null && pass!=null ){
+                            //check if they are correct - send them to server
+                            //if yes we move to main window
+                            ServerLogin ser = new ServerLogin();
+                            ser.execute();
+                        }
+                        //else - doing nothing - wait for the thread to go to explain window
+
+                    }
+                });
+
+                d.start();
+
             }
         });
 
         t.start();
-
-
-
-        SharedPreferences settings = getApplicationContext().getSharedPreferences("mySettings", 0);
-        //get from the phone the user and pass if have
-        name = settings.getString("NAME", null);
-        pass=settings.getString("PASSWORD", null);
-
-        if(name!=null && pass!=null ){
-            //check if they are correct - send them to server
-            //if yes we move to main window
-            ServerLogin ser = new ServerLogin();
-            ser.execute();
-        }
-        //else - doing nothing - wait for the thread to go to explain window
-
     }
-
-
-
-
 
 
     /***
@@ -123,11 +129,15 @@ public class SplashActivity extends NoActionBarActivity {
                     return getStr;
                 } catch (IOException e) {
                     e.printStackTrace();
+                    Intent i = new Intent(SplashActivity.this, ExplainActivity.class);
+                    startActivity(i);
                 } finally {
                     urlConnection.disconnect();
                 }
             } catch (Exception e) {
                 e.printStackTrace();
+                Intent i = new Intent(SplashActivity.this, ExplainActivity.class);
+                startActivity(i);
             }
             return null;
         }
@@ -135,7 +145,6 @@ public class SplashActivity extends NoActionBarActivity {
 
         @Override
         protected void onPostExecute(String ansStr) {
-            while(finish!=1){};
             if(ansStr.equals("login ok")){
 
                 //get coockies
@@ -148,7 +157,6 @@ public class SplashActivity extends NoActionBarActivity {
             else if(ansStr.equals("login error")){
                 Intent i = new Intent(SplashActivity.this, ExplainActivity.class);
                 startActivity(i);
-
             }
         }
     }
