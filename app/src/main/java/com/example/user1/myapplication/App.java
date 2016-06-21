@@ -8,6 +8,7 @@ import java.net.CookieManager;
 public class App extends Application {
     @Override
     public void onCreate() {
+        //check git
         super.onCreate();
 
         CookieHandler.setDefault(new CookieManager());
