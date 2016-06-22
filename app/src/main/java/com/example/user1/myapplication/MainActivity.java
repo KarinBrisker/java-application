@@ -198,7 +198,7 @@ public class MainActivity extends BaseActivity  {
                 String timeStr = "&Time=" + time;
                 String postStr = "&Msg=" + post;
 
-                String urlStr = "http://10.0.2.2:8080/ServerProj/ServerMsg?" +
+                String urlStr = "http://advprog.cs.biu.ac.il:8080/ServerProj/ServerMsg?" +
                         userStr+timeStr+postStr;
                 URL url = new URL(urlStr);
                 HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
@@ -254,7 +254,7 @@ public class MainActivity extends BaseActivity  {
 
             try {
 
-                String urlStr = "http://10.0.2.2:8080/ServerProj/ServerMsg?getMsg";
+                String urlStr = "http://advprog.cs.biu.ac.il:8080/ServerProj/ServerMsg?getMsg";
                 URL url = new URL(urlStr);
                 HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
                 try {

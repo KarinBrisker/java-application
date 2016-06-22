@@ -210,7 +210,7 @@ public class SignupActivity extends AppCompatActivity {
 
                 //localhost:8080/ServerProj/ServerSign?UserName=galit&Password=1122&RealName=alma&Mail=galitgmailcom&Img=supergirlpng
 
-                String urlStr = "http://10.0.2.2:8080/ServerProj/ServerSign?" +
+                String urlStr = "http://advprog.cs.biu.ac.il:8080/ServerProj/ServerSign?" +
                         userStr+passStr+realNameStr+mailStr+iconStr;
                 URL url = new URL(urlStr);
                 HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();

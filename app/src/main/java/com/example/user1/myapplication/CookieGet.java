@@ -33,7 +33,7 @@ public class CookieGet {
         @Override
         protected String doInBackground(Void... params) {
             try {
-                URL url = new URL("http://10.0.2.2:8080/ServerProj/ServerLogin");
+                URL url = new URL("http://advprog.cs.biu.ac.il:8080/ServerProj/ServerLogin");
                 HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
                 urlConnection.setRequestMethod("POST");
                 try {

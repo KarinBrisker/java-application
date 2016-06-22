@@ -116,7 +116,7 @@ import com.example.user1.myapplication.R;
                  String userStr = "UserName="+name;
                  String passStr = "&Password=" + password;
 
-                 String urlStr = "http://10.0.2.2:8080/ServerProj/ServerLogin?" +
+                 String urlStr = "http://advprog.cs.biu.ac.il:8080/ServerProj/ServerLogin?" +
                          userStr+passStr;
                  URL url = new URL(urlStr);
                  HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
