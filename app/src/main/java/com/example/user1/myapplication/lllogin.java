@@ -128,11 +128,13 @@ import com.example.user1.myapplication.R;
                      return getStr;
                  } catch (IOException e) {
                      e.printStackTrace();
+                     Toast.makeText(getBaseContext(), "Srerver connnection problem", Toast.LENGTH_LONG).show();
                  } finally {
                      urlConnection.disconnect();
                  }
              } catch (Exception e) {
                  e.printStackTrace();
+                 Toast.makeText(getBaseContext(), "Srerver connnection problem", Toast.LENGTH_LONG).show();
              }
              return null;
          }
@@ -157,8 +159,6 @@ import com.example.user1.myapplication.R;
                  else if(ansStr.equals("login error")){
                  Toast.makeText(getBaseContext(), "Try Again", Toast.LENGTH_LONG).show();
                  }
-             //todo - "login ok" - can continue
-             //       "login error" - cant continue - try again
          }
      }
 
