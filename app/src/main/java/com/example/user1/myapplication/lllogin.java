@@ -67,7 +67,7 @@ import com.example.user1.myapplication.R;
             textview.setGravity(Gravity.CENTER);
             textview.setText(actionbar.getTitle().toString());
             textview.setTextSize(20);
-            actionbar.setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);
+            //actionbar.setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);
             actionbar.setCustomView(textview);
 
             un = (EditText) findViewById(R.id.et_un);
