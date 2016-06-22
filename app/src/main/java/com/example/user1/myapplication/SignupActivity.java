@@ -122,11 +122,11 @@ public class SignupActivity extends AppCompatActivity {
     public boolean validate() {
         boolean valid = true;
 
-        String name = un.getText().toString();
-        String email = em.getText().toString();
-        String password = pw.getText().toString();
-        String nickname=nn.getText().toString();
-        if (name.isEmpty() || name.length() < 1) {
+        user_name = un.getText().toString();
+        email = em.getText().toString();
+        password = pw.getText().toString();
+        nick_name=nn.getText().toString();
+        if (user_name.isEmpty() || user_name.length() < 1) {
             un.setError(getResources().getString(R.string.lenError));
             valid = false;
         } else {
@@ -134,12 +134,12 @@ public class SignupActivity extends AppCompatActivity {
             user_name=un.getText().toString();
         }
 
-        if (nickname.isEmpty() || nickname.length() < 1) {
+        if (nick_name.isEmpty() || nick_name.length() < 1) {
             nn.setError(getResources().getString(R.string.lenError));
             valid = false;
         } else {
             nn.setError(null);
-            nickname=nn.getText().toString();
+            nick_name=nn.getText().toString();
         }
 
         if (email.isEmpty() || !android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches()) {

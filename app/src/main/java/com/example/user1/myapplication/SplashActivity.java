@@ -87,8 +87,10 @@ public class SplashActivity extends NoActionBarActivity {
                             //if yes we move to main window
                             ServerLogin ser = new ServerLogin();
                             ser.execute();
+                        }else{
+                            Intent i = new Intent(SplashActivity.this, ExplainActivity.class);
+                            startActivity(i);
                         }
-                        //else - doing nothing - wait for the thread to go to explain window
 
                     }
                 });
