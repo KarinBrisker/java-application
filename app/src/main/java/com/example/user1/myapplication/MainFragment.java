@@ -1,20 +1,32 @@
 package com.example.user1.myapplication;
 import android.app.Fragment;
 
+import android.app.FragmentManager;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.os.AsyncTask;
 import android.os.Bundle;
 
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.ActionBarActivity;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import org.json.JSONObject;
+
+import java.io.BufferedInputStream;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -71,7 +83,10 @@ public class MainFragment extends Fragment {
             swipeLayout.setRefreshing(false);
             Toast.makeText(getActivity(), getResources().getString(R.string.msgLoad), Toast.LENGTH_SHORT).show();
 
-            // TODO: Load 10 more messages
+            //get from the server 10 more msg;
+            ServerGetMsg ser = new ServerGetMsg();
+            ser.execute();
+
         }
     };
 
@@ -98,6 +113,132 @@ public class MainFragment extends Fragment {
         posts.add(item);
         poststAdapter.notifyDataSetChanged();
     }
+
+    /**
+     * check if msg exist in the list
+     */
+    public boolean checkIfExist(MsgClass msg){
+        for(Post p:posts){
+            if(p.getStatus().equals(msg.getMsg()) &&
+                    p.getName().equals(msg.getUser()) &&
+                    p.getTimeStamp().equals(msg.getTime())){
+                return true;
+            }
+        }
+        return false;
+    }
+
+
+
+
+
+    /**
+     * ask the server for updates
+     */
+    /***
+     * the server
+     */
+    public class ServerGetMsg extends AsyncTask<Void, Void, String> {
+
+        List<MsgClass> msgList;
+
+        //localhost:8080/ServerProj/ServerMsg?getMsg
+
+        ServerGetMsg(){
+        }
+
+        @Override
+        protected String doInBackground(Void... params) {
+
+            String getStr = null;
+            List<MsgClass> msgList;
+
+            try {
+
+                String urlStr = "http://10.0.2.2:8080/ServerProj/ServerMsg?getMsg";
+                URL url = new URL(urlStr);
+                HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
+                try {
+                    urlConnection.setRequestProperty("Cookie", CookieGet.cookie);
+                    InputStream in = new BufferedInputStream(urlConnection.getInputStream());
+                    BufferedReader streamReader = new BufferedReader(new InputStreamReader(in, "UTF-8"));
+                    StringBuilder responseStrBuilder = new StringBuilder();
+                    getStr = streamReader.readLine();
+                    return getStr;
+                } catch (IOException e) {
+                    e.printStackTrace();
+                } finally {
+                    urlConnection.disconnect();
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            return getStr;
+        }
+
+
+        @Override
+        protected void onPostExecute(String ansStr) {
+            if(!ansStr.equals("msg error")){
+
+                //convert to json
+                try {
+                    //get the msg list
+                    JSONObject gson = new JSONObject(ansStr);
+                    int size = gson.getInt("size");
+                    msgList = new ArrayList<>();
+                    MsgClass msg;
+                    String user;
+                    String time;
+                    String post;
+                    JSONObject json2;
+
+                    for(int i=0; i<size; i++){
+                        //get by index
+                        String ind = String.valueOf(i);
+                        json2 = (JSONObject) gson.get(ind);
+                        //get params
+                        user = (String) json2.get("user");
+                        time = (String) json2.get("time");
+                        post = (String) json2.get("msg");
+                        //set to class msg
+                        msg = new MsgClass();
+                        msg.setUser(user);
+                        msg.setTime(time);
+                        msg.setMsg(post);
+                        //add to list
+                        msgList.add(msg);
+                    }
+                } catch (Throwable t) {
+                    Log.e("My App", "Could not parse malformed JSON: \"" + ansStr + "\"");
+                }
+
+                final FragmentManager fm = getFragmentManager();
+                MainFragment fragment = (MainFragment)fm.findFragmentById(R.id.mainFragment);
+
+                int i=0;
+
+                for (MsgClass msg : msgList){
+
+                    if(fragment.checkIfExist(msg)){
+                        continue;
+                    }
+
+                    String new_post=msg.getMsg();
+                    String currentDateTimeString = msg.getTime();
+                    String name = msg.getUser();
+                    fragment.generateFakePosts(1,name,currentDateTimeString,new_post);
+
+                    if(i==9){
+                        return;
+                    }
+                    i++;
+                }
+            }
+        }
+    }
+
+
 }
 
 

@@ -15,8 +15,6 @@ public class NotificationReceiver extends BroadcastReceiver
 
     @Override
     public void onReceive(Context context, Intent intent) {
-        // TODO: To check if there are new messages with server
-        // TODO:if there are:(code below) else: nothing
 
         NotificationCompat.Builder mBuilder =
                 new NotificationCompat.Builder(context)

@@ -79,11 +79,6 @@ public class MainActivity extends BaseActivity  {
             postButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-
-                    //todo - change
-                    ServerGetMsg serGet = new ServerGetMsg();
-                    serGet.execute();
-/*
                     String new_post=post_txt.getText().toString();
                     MainFragment fragment = (MainFragment)fm.findFragmentById(R.id.mainFragment);
                     String currentDateTimeString = DateFormat.getDateTimeInstance().format(new Date());
@@ -92,12 +87,9 @@ public class MainActivity extends BaseActivity  {
                     fragment.generateFakePosts(1,name,currentDateTimeString,new_post);
                     post_txt.setText("");
 
-
-                    // TODO: To update the server
                     //send the msg to server
                     ServerMsg ser = new ServerMsg(name, new_post, currentDateTimeString);
                     ser.execute();
-*/
 
                 }
             });
@@ -162,9 +154,6 @@ public class MainActivity extends BaseActivity  {
                         mShakeCount = 0;
 
                         Toast.makeText(MainActivity.this, getResources().getString(R.string.loading), Toast.LENGTH_LONG).show();
-
-                        // TODO:to check if there is new data from server
-
                         //ask the server for the messages
                         ServerGetMsg serGet = new ServerGetMsg();
                         serGet.execute();
@@ -197,9 +186,9 @@ public class MainActivity extends BaseActivity  {
         String time;
 
         ServerMsg(String name, String post, String time){
-            this.name = name;
-            this.post = post.replace(" ", "$");
-            this.time = time;
+            this.name = name.replace(" ", "%20");
+            this.post = post.replace(" ", "%20");
+            this.time = time.replace(" ", "%20");
         }
 
         @Override
@@ -214,6 +203,7 @@ public class MainActivity extends BaseActivity  {
                 URL url = new URL(urlStr);
                 HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
                 try {
+                    urlConnection.setRequestProperty("Cookie", CookieGet.cookie);
                     InputStream in = new BufferedInputStream(urlConnection.getInputStream());
                     BufferedReader streamReader = new BufferedReader(new InputStreamReader(in, "UTF-8"));
                     StringBuilder responseStrBuilder = new StringBuilder();
@@ -236,7 +226,6 @@ public class MainActivity extends BaseActivity  {
         @Override
         protected void onPostExecute(String ansStr) {
             if(ansStr.equals("msg ok")){
-
             }
             else if(ansStr.equals("msg error")){
             }
@@ -246,8 +235,6 @@ public class MainActivity extends BaseActivity  {
 
     /**
      * ask the server for updates
-     */
-    /***
      * the server
      */
     public class ServerGetMsg extends AsyncTask<Void, Void, String> {
@@ -271,6 +258,7 @@ public class MainActivity extends BaseActivity  {
                 URL url = new URL(urlStr);
                 HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
                 try {
+                    urlConnection.setRequestProperty("Cookie", CookieGet.cookie);
                     InputStream in = new BufferedInputStream(urlConnection.getInputStream());
                     BufferedReader streamReader = new BufferedReader(new InputStreamReader(in, "UTF-8"));
                     StringBuilder responseStrBuilder = new StringBuilder();
@@ -326,27 +314,20 @@ public class MainActivity extends BaseActivity  {
                     Log.e("My App", "Could not parse malformed JSON: \"" + ansStr + "\"");
                 }
 
-
-//// TODO: 22/06/2016
-
+                final FragmentManager fm = getFragmentManager();
+                MainFragment fragment = (MainFragment)fm.findFragmentById(R.id.mainFragment);
 
                 for (MsgClass msg : msgList){
 
-
+                    if(fragment.checkIfExist(msg)){
+                        continue;
+                    }
 
                     String new_post=msg.getMsg();
-                    final FragmentManager fm = getFragmentManager();
-                    MainFragment fragment = (MainFragment)fm.findFragmentById(R.id.mainFragment);
                     String currentDateTimeString = msg.getTime();
                     String name = msg.getUser();
                     fragment.generateFakePosts(1,name,currentDateTimeString,new_post);
-
-
                 }
-
-
-
-
             }
         }
     }

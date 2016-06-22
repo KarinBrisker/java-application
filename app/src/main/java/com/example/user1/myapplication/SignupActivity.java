@@ -178,10 +178,8 @@ public class SignupActivity extends AppCompatActivity {
         }
 
         ok.setEnabled(false);
-        // TODO: Need to send to server. if good: session
-        //
-//        ServerSign ss=new ServerSign();
-//        ss.execute();
+        ServerSign ss=new ServerSign();
+        ss.execute();
     }
 
 
@@ -254,8 +252,6 @@ public class SignupActivity extends AppCompatActivity {
             else if(ansStr.equals("sign error")){
                 onSignupFailed();
             }
-            //todo - "sign ok" - can continue
-            //       "sign error" - cant continue - try again
         }
     }
 }
