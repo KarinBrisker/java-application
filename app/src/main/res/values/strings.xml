@@ -43,5 +43,24 @@
     <string name="title_activity_msgs">msgsActivity</string>
     <string name="title_activity_messages">MessagesActivity</string>
     <string name="title_activity_checking">checking</string>
-    <string name="title_activity_sel">sel</string>
+
+
+
+    <string name="loading">loading...</string>
+    <string name="recieved">data recieved</string>
+    <string name="lenError">at least one character</string>
+    <string name="emailError">enter a valid email address</string>
+    <string name="passwordError">between 1 and 10 alphanumeric characters</string>
+    <string name="loginFailed">Login failed</string>
+    <string name="usrName">User Name:</string>
+    <string name="password">Password:</string>
+    <string name="login">Login</string>
+    <string name="signUp">Sign Up</string>
+    <string name="post">Post</string>
+    <string name="feeds">Feeds</string>
+    <string name="msgLoad">Load more messages</string>
+    <string name="notiTitle">New messages</string>
+    <string name="notiContent">go to app :)</string>
+
+
 </resources>

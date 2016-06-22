@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- Strings related to login -->
+    <string name="prompt_email">אי מייל</string>
+    <string name="prompt_password">סיסמה (optional)</string>
+    <string name="action_sign_in">התחבר או הירשם</string>
+    <string name="action_sign_in_short">התחברות</string>
+    <string name="error_invalid_email">אימייל לא תקין</string>
+    <string name="error_invalid_password">סיסמה קצרה מידי</string>
+    <string name="error_incorrect_password">סיסמה אינה נכונה</string>
+    <string name="error_field_required">שדה דרוש</string>
+    <string name="permission_rationale">דרוש
+    </string>
+
+
+    <string name="post1">טקסט</string>
+
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">רכיב ריק</string>
+    <string name="title_activity_drag">מפעילות משיכה</string>
+    <string name="fragments">רכיב</string>
+    <string name="firstmsg">שלום לך!</string>
+    <string name="secondstring">מוכן?</string>
+    <string name="thridstring">מתחילים..</string>
+    <string name="fourthstring">תהנה</string>
+    <string name="continueBtn">המשך</string>
+    <string name="skipbtn">דלג</string>
+    <string name="explain1">ברוך הבא לשרת שלנו! האפליקציה שלנו מקשרת בין חברים</string>
+    <string name="explain2">בהתחלה אנא הכנס שם משתמש וסיסמה</string>
+    <string name="explain3">לאחר מכן תוכל להשתמש בפרטים אלו להתחברות מחודשת</string>
+    <string name="explain4">כל פעם שהשרת שלנו מקבל הודעה חדשה הוא מעדכן את כולם וכך תוכל לראות הודעות שחברים שלחו</string>
+    <string name="explain5">מקווים שתשתמש באפליקציה נכון ותהנה ממנה! בוא נתחיל!</string>
+    <string name="logoUpTab">האפליקציה של קארין ולירון</string>
+    <string name="title_activity_msgs">חלון הודעות</string>
+    <string name="title_activity_messages">חלון הודעות</string>
+
+
+    <string name="loading">טוען...</string>
+    <string name="recieved">התקבל מידע</string>
+    <string name="lenError">לפחות תו אחד</string>
+    <string name="emailError">הכנס כתובת תקינה</string>
+    <string name="passwordError">בין תו אחד לעשר תווים אלפבתים</string>
+    <string name="loginFailed">התחברות נכשלה</string>
+    <string name="usrName">שם משתמש:</string>
+    <string name="password">סיסמה:</string>
+    <string name="login">התחברות</string>
+    <string name="signUp">הרשמה</string>
+    <string name="post">פרסם</string>
+    <string name="feeds">עדכונים</string>
+    <string name="msgLoad">טוען הודעות נוספות</string>
+    <string name="notiTitle">יש הודעות חדשות</string>
+    <string name="notiContent">היכנס לאפליקציה :)</string>
+
+
+</resources>
