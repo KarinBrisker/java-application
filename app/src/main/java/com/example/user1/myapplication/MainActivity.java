@@ -23,11 +23,7 @@ import android.widget.RelativeLayout;
 import android.widget.RelativeLayout.LayoutParams;
 import android.widget.TextView;
 import android.widget.Toast;
-
-import org.json.JSONArray;
-import org.json.JSONException;
 import org.json.JSONObject;
-
 import java.io.BufferedInputStream;
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -52,20 +48,29 @@ public class MainActivity extends BaseActivity  {
     private EditText post_txt;
     private  AlarmManager alarmMgr=null;
    private PendingIntent pi = null;
+    public static MainFragment fragment;
+    public static FragmentManager fm;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_eng);
+
         sensorMgr = (SensorManager) getSystemService(SENSOR_SERVICE);
         accelerometer = sensorMgr.getDefaultSensor(SensorManager.SENSOR_ACCELEROMETER);
         listener = new ShakeListener();
             lastUpdate = System.currentTimeMillis();
             post_txt = (EditText) findViewById(R.id.text_post);
             final Fragment newFragment = new MainFragment();
-            final FragmentManager fm = getFragmentManager();
+
+            fm = getFragmentManager();
+
             FragmentTransaction ft = fm.beginTransaction();
             ft.add(R.id.mainFragment, newFragment);
             ft.commit();
+
+        fragment = (MainFragment)fm.findFragmentById(R.id.mainFragment);
+
             ActionBar ab=getSupportActionBar();
             TextView textview=new TextView(getApplicationContext());
             LayoutParams layoutparams = new RelativeLayout.LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT);
@@ -80,7 +85,7 @@ public class MainActivity extends BaseActivity  {
                 @Override
                 public void onClick(View v) {
                     String new_post=post_txt.getText().toString();
-                    MainFragment fragment = (MainFragment)fm.findFragmentById(R.id.mainFragment);
+                    fragment = (MainFragment)fm.findFragmentById(R.id.mainFragment);
                     String currentDateTimeString = DateFormat.getDateTimeInstance().format(new Date());
                     SharedPreferences settings = getApplicationContext().getSharedPreferences("mySettings", 0);
                     String name = settings.getString("NAME", null);
@@ -96,9 +101,9 @@ public class MainActivity extends BaseActivity  {
          alarmMgr = (AlarmManager)getSystemService(Context.ALARM_SERVICE);
       //  Long timeToAlert = new GregorianCalendar().getTimeInMillis() + 5000*60;
         Intent intent = new Intent(this, NotificationReceiver.class);
-              //  intent.putExtra("sender", "one");
         pi=PendingIntent.getBroadcast(this, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
-        alarmMgr.setRepeating(AlarmManager.RTC_WAKEUP, new GregorianCalendar().getTimeInMillis(),5000*60, pi);
+        //todo - cahnge time
+        alarmMgr.setRepeating(AlarmManager.RTC_WAKEUP, new GregorianCalendar().getTimeInMillis(),100, pi);
       //  Toast.makeText(this, "Alarms were set", Toast.LENGTH_SHORT).show();
     }
 
@@ -313,9 +318,6 @@ public class MainActivity extends BaseActivity  {
                 } catch (Throwable t) {
                     Log.e("My App", "Could not parse malformed JSON: \"" + ansStr + "\"");
                 }
-
-                final FragmentManager fm = getFragmentManager();
-                MainFragment fragment = (MainFragment)fm.findFragmentById(R.id.mainFragment);
 
                 for (MsgClass msg : msgList){
 
