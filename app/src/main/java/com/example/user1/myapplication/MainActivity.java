@@ -102,8 +102,7 @@ public class MainActivity extends BaseActivity  {
       //  Long timeToAlert = new GregorianCalendar().getTimeInMillis() + 5000*60;
         Intent intent = new Intent(this, NotificationReceiver.class);
         pi=PendingIntent.getBroadcast(this, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
-        //todo - cahnge time
-        alarmMgr.setRepeating(AlarmManager.RTC_WAKEUP, new GregorianCalendar().getTimeInMillis(),100, pi);
+        alarmMgr.setRepeating(AlarmManager.RTC_WAKEUP, new GregorianCalendar().getTimeInMillis(),5000*60, pi);
       //  Toast.makeText(this, "Alarms were set", Toast.LENGTH_SHORT).show();
     }
 
